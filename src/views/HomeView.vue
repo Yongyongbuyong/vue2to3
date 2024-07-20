@@ -101,7 +101,7 @@ function handleClose() {
   </div>
 </template>
 
-<style scoped>
+<style>
 .container {
   display: flex;
   flex-direction: column;

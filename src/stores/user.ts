@@ -26,7 +26,7 @@ export const useUserStore = defineStore('user', {
     setHand(v: number) {
       this.gHand = v
     },
-    setgID(v: any) {
+    setgId(v: any) {
       //将传递的数据先保存到localStorage中
       localStorage.setItem('gId', JSON.stringify(v))
       // 之后才是修改state中的状态

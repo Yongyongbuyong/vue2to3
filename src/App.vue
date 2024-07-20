@@ -6,7 +6,8 @@ import Switch_lang from './views/Switch_lang.vue'
 <template>
   <div>
     <Switch_lang />
-    <router-view />
+    <!-- <router-view /> -->
+    <RouterView></RouterView>
   </div>
 </template>
 
