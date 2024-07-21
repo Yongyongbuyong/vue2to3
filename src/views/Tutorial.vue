@@ -1,10 +1,64 @@
 <template>
   <div>
-    <h2>Tutorial</h2>
+    <el-container>
+      <el-header
+        ><h1>{{ $t('tutorial_page.title') }}</h1></el-header
+      >
+      <el-container>
+        <el-aside width="50%"
+          ><div>
+            <video id="myVideo" class="video-js" controls="true">
+              <!-- autoplay ="true" -->
+              <source :src="videoSrc" type="video/mp4" />
+            </video>
+            <p class="note-txt">{{ $t('tutorial_page.prompt_left') }}</p>
+          </div></el-aside
+        >
+        <el-main>
+          <Record />
+        </el-main>
+      </el-container>
+    </el-container>
   </div>
 </template>
 
-<script lang="ts" setup name="Tutorial"></script>
+<script lang="ts" setup name="Tutorial">
+import Record from './Record.vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import router from '@/router'
+let videoSrc = ref(
+  'https://6876-hvc-cloud-9ge10myz6e6ceea2-1304550954.tcb.qcloud.la/tutorial_video_small.mp4?sign=e3cfe3686e0a14893b422a167142dce8&t=1620975471'
+)
+let showBegin = ref(false)
+let second = ref(5)
+
+function countdown() {
+  second.value--
+  if (second.value <= 0) {
+    showBegin.value = true
+  }
+}
+
+function beginRecord() {
+  router.push({ path: '/record' })
+}
+
+let timer = ref<number | null>(null)
+
+onMounted(() => {
+  timer.value = setInterval(() => {
+    countdown()
+  }, 1000)
+})
+
+onBeforeUnmount(() => {
+  // 如果 timer.value 存在（即不是 null），则清除定时器
+  if (timer.value) {
+    clearInterval(timer.value)
+  }
+  timer.value = null
+})
+</script>
 
 <style>
 .el-footer {
