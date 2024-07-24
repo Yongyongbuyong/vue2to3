@@ -43,8 +43,8 @@ const onSubmit = () => {
       <el-col :span="12"
         ><div class="question">{{ $t('mJOA_page.Q_upper') }}</div>
         <div class="form_text">
-          <el-radio-group v-model="form.limb">
-            <el-radio value="5">{{ $t('mJOA_page.A_upper_1') }}</el-radio>
+          <el-radio-group v-model="form.limb" class="single-line-radio-group">
+            <el-radio value="5" >{{ $t('mJOA_page.A_upper_1') }}</el-radio>
             <el-radio value="4">{{ $t('mJOA_page.A_upper_2') }}</el-radio>
             <el-radio value="3">{{ $t('mJOA_page.A_upper_3') }}</el-radio>
             <el-radio value="2">{{ $t('mJOA_page.A_upper_4') }}</el-radio>
@@ -54,8 +54,8 @@ const onSubmit = () => {
         </div>
         <div class="hr1"></div>
         <div class="question">{{ $t('mJOA_page.Q_sensation') }}</div>
-        <div class="form_text">
-          <el-radio-group v-model="form.feel">
+        <div class="form_text" >
+          <el-radio-group v-model="form.feel" class="single-line-radio-group">
             <el-radio value="3">{{ $t('mJOA_page.A_sensation_1') }}</el-radio>
             <el-radio value="2">{{ $t('mJOA_page.A_sensation_2') }}</el-radio>
             <el-radio value="1">{{ $t('mJOA_page.A_sensation_3') }}</el-radio>
@@ -67,7 +67,7 @@ const onSubmit = () => {
       <el-col :span="12"
         ><div class="question">{{ $t('mJOA_page.Q_lower') }}</div>
         <div class="form_text">
-          <el-radio-group v-model="form.leg">
+          <el-radio-group v-model="form.leg" class="single-line-radio-group">
             <el-radio value="7">{{ $t('mJOA_page.A_lower_1') }}</el-radio>
             <el-radio value="6">{{ $t('mJOA_page.A_lower_2') }}</el-radio>
             <el-radio value="5">{{ $t('mJOA_page.A_lower_3') }}</el-radio>
@@ -81,7 +81,7 @@ const onSubmit = () => {
         <div class="hr1"></div>
         <div class="question">{{ $t('mJOA_page.Q_sphincter') }}</div>
         <div class="form_text">
-          <el-radio-group v-model="form.sphinc">
+          <el-radio-group v-model="form.sphinc" class="single-line-radio-group">
             <el-radio value="3">{{ $t('mJOA_page.A_sphincter_1') }}</el-radio>
             <el-radio value="2">{{ $t('mJOA_page.A_sphincter_2') }}</el-radio>
             <el-radio value="1">{{ $t('mJOA_page.A_sphincter_3') }}</el-radio>
@@ -126,11 +126,22 @@ const onSubmit = () => {
   height: 1px;
   background-color: #eeeeee;
 }
-.el-radio {
-  text-align: left;
+/*
+:deep(.el-radio-group){
+  display: block;
+  margin:10px 0;
+}
+*/
 
+/*为什么要组合着使用才能生效？*/
+.single-line-radio-group .el-radio {
+  display: block;
+  margin-bottom: 10px;
+}
+:deep(.el-radio-group) {
   display: block;
   margin: 10px 0;
+  text-align: left;
 }
 
 .title {

@@ -109,7 +109,7 @@ function upload() {
       <div></div>
     </div>
     <el-button type="primary" size="default" @click="upload" round>上传刚录制的视频</el-button>
-    <Test1 />
+    <Test1 style="margin-top: 10px" />
   </div>
 </template>
 
@@ -121,6 +121,7 @@ function upload() {
   flex-direction: column;
   align-items: center;
 }
+
 #myVideo {
   /* width: 80%; 调整视频框的宽度 */
   margin: 0 auto; /* 居中视频框 */
