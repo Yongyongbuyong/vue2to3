@@ -146,6 +146,7 @@ export default {
       level3: '中等',
       level4: '較差'
     },
-    graph_title: '抓握速度分析表(單位:GPM)'
+    graph_title: '抓握速度分析表(單位:GPM)',
+    note: '本結果僅供參考，不做正式診斷用途，有疑問請諮詢脊椎外科醫生，歡迎致電020-83827812-61010。十秒抓握試驗分析結果參考Machino. Clin Neurol Neurosurg. 2019; Yukawa. J Orthop Sci. 2013'
   }
 }

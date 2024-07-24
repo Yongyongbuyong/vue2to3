@@ -155,6 +155,7 @@ export default {
       level3: 'Fair',
       level4: 'Poor'
     },
-    graph_title: 'Grip Speed Analysis Chart (Unit: GPM)'
+    graph_title: 'Grip Speed Analysis Chart (Unit: GPM)',
+    note: 'This result is for reference only and is not intended for formal diagnosis. If you have any questions, please consult a spinal surgeon. Please call 020-83827812-61010. The results of the 10-second grip test are available from Machino. Clin Neurol Neurosurg. 2019; Yukawa. J Orthop Sci. 2013'
   }
 }
