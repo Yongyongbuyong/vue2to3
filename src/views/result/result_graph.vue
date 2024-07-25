@@ -114,7 +114,6 @@ watch(i18n.global.locale, () => {
 
 <template>
   <div>
-    <h2>result_graph</h2>
     <div class="l-form-label">{{ $t('result_page.graph_title') }}</div>
     <div
       class="echart"
