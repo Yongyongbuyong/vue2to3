@@ -59,7 +59,10 @@ export default {
     no_text: 'No',
     术后随访: 'Postoperative follow-up',
     筛查: 'Screening',
-    note: 'Note: The above information is very important for an accurate assessment of hand function in cervical spine, so please make sure you fill it out accurately.'
+    note: 'Note: The above information is very important for an accurate assessment of hand function in cervical spine, so please make sure you fill it out accurately.',
+    iswith:
+      'Fields with an * indicate required information, while fields without an * indicate optional information',
+    start: 'Start recording video'
   },
   tutorial_page: {
     title: 'Record Tutorial Page',

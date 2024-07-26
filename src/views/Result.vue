@@ -1,14 +1,14 @@
 <script setup lang="ts" name="Result">
 import Result_data from './result/result_data.vue'
 import Result_graph from './result/result_graph.vue'
-import {ref, reactive, computed, onMounted, watch} from 'vue'
+import { ref, reactive, computed, onMounted, watch } from 'vue'
 import i18n from '@/i18n'
 import axios from 'axios'
-import {useUserStore} from '@/stores/user'
+import { useUserStore } from '@/stores/user'
 
 const userStore = useUserStore()
 import router from '@/router'
-import {ElMessage} from 'element-plus'
+import { ElMessage } from 'element-plus'
 
 let isPatient = ref(false)
 
@@ -51,13 +51,13 @@ const errorResult = computed(() => {
 })
 const left_atime = computed(() => {
   return analyse.left_count === '0'
-      ? analyse.left_count
-      : (10 / parseInt(analyse.left_count)).toFixed(2)
+    ? analyse.left_count
+    : (10 / parseInt(analyse.left_count)).toFixed(2)
 })
 const right_atime = computed(() => {
   return analyse.right_count === '0'
-      ? analyse.right_count
-      : (10 / parseInt(analyse.right_count)).toFixed(2)
+    ? analyse.right_count
+    : (10 / parseInt(analyse.right_count)).toFixed(2)
 })
 const suggest = reactive({
   text: ''
@@ -65,71 +65,75 @@ const suggest = reactive({
 
 // 监听 info 和 i18n.global.locale 的变化
 watch(
-    () => [info.result, info.mjoa_score, i18n.global.locale.value],
-    ([newResult, newMjoaScore, locale]) => {
-      // 将 mjoa_score 转换为 number 类型
-      const mjoaScoreNumber =
-          typeof newMjoaScore === 'string' ? parseFloat(newMjoaScore) : newMjoaScore
+  () => [info.result, info.mjoa_score, i18n.global.locale.value],
+  ([newResult, newMjoaScore, locale]) => {
+    // 将 mjoa_score 转换为 number 类型
+    const mjoaScoreNumber =
+      typeof newMjoaScore === 'string' ? parseFloat(newMjoaScore) : newMjoaScore
 
-      // 根据 mjoa_score 和 result 的逻辑更新 result
-      if (newResult === '较低' && mjoaScoreNumber < 18) {
-        info.result = '中度'
-      }
+    // 根据 mjoa_score 和 result 的逻辑更新 result
+    if (newResult === '较低' && mjoaScoreNumber < 18) {
+      info.result = '中度'
+    }
 
-      // 生成建议文本
-      if (locale === 'en') {
-        if (info.result === '较低') {
-          info.result = i18n.global.t('result_page.result_page_level.level1')
-        } else if (info.result === '中度') {
-          info.result = i18n.global.t('result_page.result_page_level.level2')
-        } else if (info.result === '较高') {
-          info.result = i18n.global.t('result_page.result_page_level.level3')
-        } else {
-          info.result = i18n.global.t('result_page.result_page_level.level4')
-        }
-        suggest.text = suggest.text =
-            info.result === '优秀' || info.result === '暂无结果'
-                ? 'regularly recheck the function of your cervical spine.'
-                : "seek medical treatment at the Spinal Surgery Outpatient Department of Guangdong Provincial People's Hospital."
-      } else if (locale === 'zh') {
-        if (info.result === '较低') {
-          info.result = '优秀'
-        } else if (info.result === '中度') {
-          info.result = '良好'
-        } else if (info.result === '较高') {
-          info.result = '中等'
-        } else {
-          info.result = '较差'
-        }
-        suggest.text =
-            info.result === '优秀' || info.result === '暂无结果'
-                ? '定期复查颈椎功能。'
-                : '到广东省人民医院脊柱外科门诊就诊。'
-      } else if (locale === 'zhTW') {
-        if (info.result === '较低') {
-          info.result = '優秀'
-        } else if (info.result === '中度') {
-          info.result = '良好'
-        } else if (info.result === '较高') {
-          info.result = '中等'
-        } else {
-          info.result = '較差'
-        }
-        suggest.text =
-            info.result === '优秀' || info.result === '暂无结果'
-                ? '定期檢查頸椎功能。'
-                : '到廣東省人民醫院脊柱外科門診就診。'
+    // 生成建议文本
+    if (locale === 'en') {
+      if (info.result === '较低') {
+        info.result = i18n.global.t('result_page.result_page_level.level1')
+      } else if (info.result === '中度') {
+        info.result = i18n.global.t('result_page.result_page_level.level2')
+      } else if (info.result === '较高') {
+        info.result = i18n.global.t('result_page.result_page_level.level3')
+      } else {
+        info.result = i18n.global.t('result_page.result_page_level.level4')
       }
-    },
-    {immediate: true} // 添加这一行以确保初始值也被处理
+      suggest.text = suggest.text =
+        info.result === '优秀' || info.result === '暂无结果'
+          ? 'regularly recheck the function of your cervical spine.'
+          : "seek medical treatment at the Spinal Surgery Outpatient Department of Guangdong Provincial People's Hospital."
+    } else if (locale === 'zh') {
+      if (info.result === '较低') {
+        info.result = '优秀'
+      } else if (info.result === '中度') {
+        info.result = '良好'
+      } else if (info.result === '较高') {
+        info.result = '中等'
+      } else {
+        info.result = '较差'
+      }
+      suggest.text =
+        info.result === '优秀' || info.result === '暂无结果'
+          ? '定期复查颈椎功能。'
+          : '到广东省人民医院脊柱外科门诊就诊。'
+    } else if (locale === 'zhTW') {
+      if (info.result === '较低') {
+        info.result = '優秀'
+      } else if (info.result === '中度') {
+        info.result = '良好'
+      } else if (info.result === '较高') {
+        info.result = '中等'
+      } else {
+        info.result = '較差'
+      }
+      suggest.text =
+        info.result === '优秀' || info.result === '暂无结果'
+          ? '定期檢查頸椎功能。'
+          : '到廣東省人民醫院脊柱外科門診就診。'
+    }
+  },
+  { immediate: true } // 添加这一行以确保初始值也被处理
 )
 const get = async () => {
   // `d-info/${userStore.gId}/get`
   try {
     const response = await axios.get('d-info/' + 2861 + '/get')
     console.log(response.data)
-    analyse = response.data.analyse
-    info = response.data.info
+    // 更新 info 对象的属性
+    Object.assign(info, response.data.info)
+
+    // 更新 analyse 对象的属性
+    Object.assign(analyse, response.data.analyse)
+
     console.log(analyse)
   } catch (error) {
     console.error(error)
@@ -149,7 +153,7 @@ const get_ploted = async () => {
 
 function onBack() {
   userStore.setDefault
-  router.push({path: '/'})
+  router.push({ path: '/' })
 }
 
 function fetchVideoUrl() {
@@ -179,11 +183,11 @@ const genCopyData = () => {
   ret += '变异系数：左手 ' + analyse.left_vCV + ' %，右手 ' + analyse.right_vCV + ' %\n'
   ret += '补充信息评分：mJOA评分为 ' + info.mjoa_score + ' 分\n'
   ret +=
-      '检测结论：根据十秒抓握实验结果，预测您的手部灵活性等级为 ' +
-      info.result +
-      '。根据以上结果，建议您 ' +
-      suggest.text +
-      '。\n'
+    '检测结论：根据十秒抓握实验结果，预测您的手部灵活性等级为 ' +
+    info.result +
+    '。根据以上结果，建议您 ' +
+    suggest.text +
+    '。\n'
   return ret
 }
 const copyToClipboard = async (content: string) => {
@@ -216,7 +220,6 @@ onMounted(() => {
         <h2>{{ $t('result_page.title') }}</h2>
       </div>
 
-
       <div style="display: flex">
         <!--下面的视频和评估-->
         <el-col :span="12">
@@ -228,65 +231,65 @@ onMounted(() => {
           <!-- ref="videoPlayer" -->
           <div class="video-wrapper">
             <video
-                ref="videoPlayer"
-                controls
-                :style="{
+              ref="videoPlayer"
+              controls
+              :style="{
                 width: '300px',
                 height: 'auto',
                 margin: '100 10%'
               }"
             >
-              <source :src="video_url" type="video/mp4"/>
+              <source :src="video_url" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-            <hr class="hr1"/>
+            <hr class="hr1" />
             <div>
-              <Result_graph/>
+              <Result_graph />
             </div>
           </div>
         </el-col>
 
         <el-col :span="12">
-          <Result_data/>
+          <Result_data />
         </el-col>
       </div>
     </el-row>
 
     <el-footer>
       <el-button
-          v-if="!errorResult"
-          round
-          class="bt-check"
-          type="primary"
-          size="small"
-          @click="onCopyResult"
-      ><span class="btn-txt"
-      ><el-icon><CopyDocument/></el-icon>{{ $t('result_page.btn_copy') }}</span
-      ></el-button
+        v-if="!errorResult"
+        round
+        class="bt-check"
+        type="primary"
+        size="small"
+        @click="onCopyResult"
+        ><span class="btn-txt"
+          ><el-icon><CopyDocument /></el-icon>{{ $t('result_page.btn_copy') }}</span
+        ></el-button
       >
 
       <el-button
-          round
-          v-if="errorResult"
-          class="bt-check"
-          type="warning"
-          size="small"
-          @click="onBack"
-      ><span class="btn-txt"
-      ><el-icon><Refresh/></el-icon>{{ $t('result_page.btn_re') }}</span
-      ></el-button
+        round
+        v-if="errorResult"
+        class="bt-check"
+        type="warning"
+        size="small"
+        @click="onBack"
+        ><span class="btn-txt"
+          ><el-icon><Refresh /></el-icon>{{ $t('result_page.btn_re') }}</span
+        ></el-button
       >
 
       <el-button
-          v-if="!errorResult"
-          round
-          class="bt-check"
-          type="success"
-          size="small"
-          @click="onBack"
-      ><span class="btn-txt"
-      ><el-icon><SuccessFilled/></el-icon>{{ $t('result_page.btn_home') }}</span
-      ></el-button
+        v-if="!errorResult"
+        round
+        class="bt-check"
+        type="success"
+        size="small"
+        @click="onBack"
+        ><span class="btn-txt"
+          ><el-icon><SuccessFilled /></el-icon>{{ $t('result_page.btn_home') }}</span
+        ></el-button
       >
       <!-- <div v-if="!errorResult" class="note-txt">注：{{ note }}</div> -->
     </el-footer>

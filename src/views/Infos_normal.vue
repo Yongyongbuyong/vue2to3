@@ -1,10 +1,10 @@
 <script setup lang="ts" name="Infos_normal">
-import {ref, reactive, onMounted} from 'vue'
-import {useUserStore} from '@/stores/user'
-import {ElMessageBox} from 'element-plus'
+import { ref, reactive, onMounted } from 'vue'
+import { useUserStore } from '@/stores/user'
+import { ElMessageBox } from 'element-plus'
 import axios from 'axios'
 import router from '@/router'
-import type {ComponentSize, FormInstance, FormRules} from 'element-plus'
+import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
 
 const userStore = useUserStore()
 // let checkAge = (value: any, callback: any) => {
@@ -65,10 +65,10 @@ let rules = reactive({
     // { type:'number', message: '您输入的年龄不太对吧' },
     // { min: 0, max: 150, message: '请输入一个0~150的数字', trigger: 'blur' }
   ],
-  patient: [{required: true, message: '请输入您的住院号'}],
+  patient: [{ required: true, message: '请输入您的住院号' }],
   number: [
     // { type:'number', message: '您输入的电话不太对吧' },
-    {min: 8, max: 11, message: '长度在 8 到 11 个字符', trigger: 'blur'}
+    { min: 8, max: 11, message: '长度在 8 到 11 个字符', trigger: 'blur' }
   ]
 })
 
@@ -82,30 +82,29 @@ const submitForm = async (formEl: FormInstance | undefined) => {
         // center: true,
         roundButton: true
       })
-          .then(() => {
-            isLoading.value = true
-            axios
-                .post('/d-info/add', {
-                  name: 'normal',
-                  age: ruleForm.age,
-                  sex: ruleForm.sex,
-                  tel: ruleForm.number,
-                  patient: ''
-                })
-                .then((res: any) => {
-                  infoCheck.value = true
-                  userStore.setgId(res.data.id)
-                  console.log(res)
-                })
-                .catch((error: any) => {
-                  console.log(error)
-                })
-                .finally(() => {
-                  isLoading.value = false
-                })
-          })
-          .catch(() => {
-          })
+        .then(() => {
+          isLoading.value = true
+          axios
+            .post('/d-info/add', {
+              name: 'normal',
+              age: ruleForm.age,
+              sex: ruleForm.sex,
+              tel: ruleForm.number,
+              patient: ''
+            })
+            .then((res: any) => {
+              infoCheck.value = true
+              userStore.setgId(res.data.id)
+              console.log(res)
+            })
+            .catch((error: any) => {
+              console.log(error)
+            })
+            .finally(() => {
+              isLoading.value = false
+            })
+        })
+        .catch(() => {})
     } else {
       console.log('error submit!', fields)
     }
@@ -143,27 +142,25 @@ onMounted(() => {
           <el-col :span="12">
             <!-- <div class="background-container"> -->
             <div>
-              <img class="circleImg" src="../assets/scut.jpg"/>
+              <img class="circleImg" src="../assets/scut.jpg" />
               <div class="txt-avatar"></div>
-              <img class="circleImg" src="../assets/gdph.jpg"/>
+              <img class="circleImg" src="../assets/gdph.jpg" />
             </div>
             <div class="grid-content">
               {{ $t('info_page.description') }}
             </div>
             <div>{{ $t('info_page.coopration') }}</div>
-          </el-col
-          >
-          <el-col :span="12"
-          >
+          </el-col>
+          <el-col :span="12">
             <div class="grid-content">
               <el-form
-                  style="margin-top: 10%"
-                  :model="ruleForm"
-                  ref="ruleFormRef"
-                  :rules="rules"
-                  class="container"
-                  label-position="left"
-                  label-width="80px"
+                style="margin-top: 10%"
+                :model="ruleForm"
+                ref="ruleFormRef"
+                :rules="rules"
+                class="container"
+                label-position="left"
+                label-width="80px"
               >
                 <el-form-item :label="$t('info_page.gender')" prop="sex">
                   <el-radio-group v-model="ruleForm.sex">
@@ -173,34 +170,34 @@ onMounted(() => {
                 </el-form-item>
                 <el-form-item :label="$t('info_page.age')" prop="age">
                   <el-input
-                      type="number"
-                      v-model.number="ruleForm.age"
-                      :placeholder="$t('info_page.age_text')"
+                    type="number"
+                    v-model.number="ruleForm.age"
+                    :placeholder="$t('info_page.age_text')"
                   ></el-input>
                 </el-form-item>
 
                 <el-form-item :label="$t('info_page.phone_number')" prop="number">
                   <el-input
-                      v-model="ruleForm.number"
-                      :placeholder="$t('info_page.phone_number_text')"
+                    v-model="ruleForm.number"
+                    :placeholder="$t('info_page.phone_number_text')"
                   ></el-input>
                 </el-form-item>
 
-                <div style="font-size: 14px; opacity: 0.6">
+                <!-- <div style="font-size: 14px; opacity: 0.6">
                   带<span style="color: red; opacity: 0.8">*</span>号代表着必填信息，不带<span
                     style="color: red; opacity: 0.8"
                 >*</span
                 >代表着选填信息
-                </div>
-                <hr class="hr"/>
+                </div> -->
+                <div style="font-size: 14px; opacity: 0.6">{{ $t('info_page.iswith') }}</div>
+                <hr class="hr" />
                 <div>
                   <!-- <div class="bold">注:</div> -->
                   {{ $t('info_page.note') }}
                 </div>
-                <hr class="hr"/>
+                <hr class="hr" />
               </el-form>
-            </div
-            >
+            </div>
           </el-col>
         </div>
       </el-main>
@@ -208,31 +205,25 @@ onMounted(() => {
         <el-footer>
           <el-row>
             <el-button
-                v-if="!infoCheck"
-                type="primary"
-                round
-                @click="submitForm(ruleFormRef)"
-                :loading="isLoading"
-            >{{ $t('button.submit') }}
-            </el-button
-            >
-            <el-button v-if="!infoCheck" round @click="resetForm(ruleFormRef)">{{
-                $t('button.reset')
-              }}
+              v-if="!infoCheck"
+              type="primary"
+              round
+              @click="submitForm(ruleFormRef)"
+              :loading="isLoading"
+              >{{ $t('button.submit') }}
             </el-button>
-            <el-button v-if="infoCheck" type="primary" round @click="confirmTutorial"
-            >
+            <el-button v-if="!infoCheck" round @click="resetForm(ruleFormRef)"
+              >{{ $t('button.reset') }}
+            </el-button>
+            <el-button v-if="infoCheck" type="primary" round @click="confirmTutorial">
               <el-icon>
-                <VideoCameraFilled/>
+                <VideoCameraFilled />
               </el-icon>
-              开始录制视频
-            </el-button
-            >
+              {{ $t('info_page.start') }}
+            </el-button>
           </el-row>
-        </el-footer
-        >
+        </el-footer>
       </div>
-
     </div>
   </el-container>
 </template>

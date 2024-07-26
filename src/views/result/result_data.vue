@@ -1,7 +1,7 @@
 <script lang="ts" setup name="result_data">
 import * as echarts from 'echarts'
 import i18n from '@/i18n'
-import { ref, reactive, onMounted, watch, computed } from 'vue'
+import { ref, reactive, onMounted, watch, computed, watchEffect, onBeforeMount } from 'vue'
 import axios from 'axios'
 import { useUserStore } from '@/stores/user'
 const userStore = useUserStore()
@@ -10,14 +10,14 @@ import { ElMessage } from 'element-plus'
 
 let isPatient = ref(false)
 let info = reactive({
-  id: 0,
+  id: -1,
   name: '',
-  sex: 0,
-  age: 0,
+  sex: -1,
+  age: -1,
   patient: '',
   // left_atime: "",
   // right_atime: "",
-  mjoa_score: 0,
+  mjoa_score: -1,
   result: ''
   // left_check: false,
   // right_check: false,
@@ -44,16 +44,26 @@ const margin_top = computed(() => {
 const sex = computed(() => {
   return info.sex === 0 ? i18n.global.t('info_page.male') : i18n.global.t('info_page.female')
 })
-const left_atime = computed(() => {
-  return analyse.left_count === '0'
-    ? analyse.left_count
-    : (10 / parseInt(analyse.left_count)).toFixed(2)
-})
-const right_atime = computed(() => {
-  return analyse.right_count === '0'
-    ? analyse.right_count
-    : (10 / parseInt(analyse.right_count)).toFixed(2)
-})
+const left_atime = ref(0)
+const right_atime = ref(0)
+
+// 合并逻辑到一个函数中
+function updateTimes() {
+  const leftCountNumber = parseFloat(analyse.left_count)
+  if (isNaN(leftCountNumber)) {
+    left_atime.value = NaN // 或者返回其他默认值
+  } else {
+    left_atime.value = leftCountNumber === 0 ? 0 : Number((10 / leftCountNumber).toFixed(2))
+  }
+
+  right_atime.value =
+    analyse.right_count === '0'
+      ? Number(analyse.right_count)
+      : Number((10 / parseInt(analyse.right_count)).toFixed(2))
+}
+
+// 监听 analyse.left_count 和 analyse.right_count 的变化
+watch([() => analyse.left_count, () => analyse.right_count], updateTimes)
 const errorResult = computed(() => {
   return parseInt(analyse.left_count) < 5 || parseInt(analyse.right_count) < 5
 })
@@ -61,7 +71,7 @@ const diagnosis = reactive({
   resultText: ''
 })
 watch(
-  () => [info.result, info.mjoa_score],
+  () => [info.result, info.mjoa_score, i18n.global.locale.value], // 添加 i18n.global.locale.value
   ([newResult, newMjoaScore]) => {
     // 更新性别显示
     // info.sex = info.sex == 0 ? '男' : '女';
@@ -94,65 +104,64 @@ const suggest = reactive({
 })
 
 // 监听 info 和 i18n.global.locale 的变化
-watch(
-  () => [info.result, info.mjoa_score, i18n.global.locale.value],
-  ([newResult, newMjoaScore, locale]) => {
-    // 将 mjoa_score 转换为 number 类型
-    const mjoaScoreNumber =
-      typeof newMjoaScore === 'string' ? parseFloat(newMjoaScore) : newMjoaScore
+watchEffect(() => {
+  const { result, mjoa_score } = info
+  const locale = i18n.global.locale.value
 
-    // 根据 mjoa_score 和 result 的逻辑更新 result
-    if (newResult === '较低' && mjoaScoreNumber < 18) {
-      info.result = '中度'
-    }
+  // 将 mjoa_score 转换为 number 类型
+  const mjoaScoreNumber = typeof mjoa_score === 'string' ? parseFloat(mjoa_score) : mjoa_score
 
-    // 生成建议文本
-    if (locale === 'en') {
-      if (info.result === '较低') {
-        info.result = i18n.global.t('result_page.result_page_level.level1')
-      } else if (info.result === '中度') {
-        info.result = i18n.global.t('result_page.result_page_level.level2')
-      } else if (info.result === '较高') {
-        info.result = i18n.global.t('result_page.result_page_level.level3')
-      } else {
-        info.result = i18n.global.t('result_page.result_page_level.level4')
-      }
-      suggest.text = suggest.text =
-        info.result === '优秀' || info.result === '暂无结果'
-          ? 'regularly recheck the function of your cervical spine.'
-          : "seek medical treatment at the Spinal Surgery Outpatient Department of Guangdong Provincial People's Hospital."
-    } else if (locale === 'zh') {
-      if (info.result === '较低') {
-        info.result = '优秀'
-      } else if (info.result === '中度') {
-        info.result = '良好'
-      } else if (info.result === '较高') {
-        info.result = '中等'
-      } else {
-        info.result = '较差'
-      }
-      suggest.text =
-        info.result === '优秀' || info.result === '暂无结果'
-          ? '定期复查颈椎功能。'
-          : '到广东省人民医院脊柱外科门诊就诊。'
-    } else if (locale === 'zhTW') {
-      if (info.result === '较低') {
-        info.result = '優秀'
-      } else if (info.result === '中度') {
-        info.result = '良好'
-      } else if (info.result === '较高') {
-        info.result = '中等'
-      } else {
-        info.result = '較差'
-      }
-      suggest.text =
-        info.result === '优秀' || info.result === '暂无结果'
-          ? '定期檢查頸椎功能。'
-          : '到廣東省人民醫院脊柱外科門診就診。'
+  // 根据 mjoa_score 和 result 的逻辑更新 result
+  if (result === '较低' && mjoaScoreNumber < 18) {
+    info.result = '中度'
+  }
+
+  // 生成建议文本
+  if (locale === 'en') {
+    if (info.result === '较低') {
+      info.result = i18n.global.t('result_page.result_page_level.level1')
+    } else if (info.result === '中度') {
+      info.result = i18n.global.t('result_page.result_page_level.level2')
+    } else if (info.result === '较高') {
+      info.result = i18n.global.t('result_page.result_page_level.level3')
+    } else {
+      info.result = i18n.global.t('result_page.result_page_level.level4')
     }
-  },
-  { immediate: true } // 添加这一行以确保初始值也被处理
-)
+    suggest.text =
+      info.result === '优秀' || info.result === '暂无结果'
+        ? 'regularly recheck the function of your cervical spine.'
+        : "seek medical treatment at the Spinal Surgery Outpatient Department of Guangdong Provincial People's Hospital."
+  } else if (locale === 'zh') {
+    if (info.result === '较低') {
+      info.result = '优秀'
+    } else if (info.result === '中度') {
+      info.result = '良好'
+    } else if (info.result === '较高') {
+      info.result = '中等'
+    } else {
+      info.result = '较差'
+    }
+    suggest.text =
+      info.result === '优秀' || info.result === '暂无结果'
+        ? '定期复查颈椎功能。'
+        : '到广东省人民医院脊柱外科门诊就诊。'
+  } else if (locale === 'zhTW') {
+    if (info.result === '较低') {
+      info.result = '優秀'
+    } else if (info.result === '中度') {
+      info.result = '良好'
+    } else if (info.result === '较高') {
+      info.result = '中等'
+    } else {
+      info.result = '較差'
+    }
+    suggest.text =
+      info.result === '优秀' || info.result === '暂无结果'
+        ? '定期檢查頸椎功能。'
+        : '到廣東省人民醫院脊柱外科門診就診。'
+  }
+})
+
 //方法
 
 const get = async () => {
@@ -160,9 +169,15 @@ const get = async () => {
   try {
     const response = await axios.get('d-info/' + 2861 + '/get')
     console.log(response.data)
-    analyse = response.data.analyse
-    info = response.data.info
+    // 更新 info 对象的属性
+    Object.assign(info, response.data.info)
+
+    // 更新 analyse 对象的属性
+    Object.assign(analyse, response.data.analyse)
+
     console.log(analyse)
+    console.log(analyse.left_count)
+    updateTimes()
   } catch (error) {
     console.error(error)
   }
@@ -227,7 +242,9 @@ const onCopyResult = () => {
     center: true
   })
 }
-onMounted(() => {
+get()
+onMounted(() => {})
+onBeforeMount(() => {
   get()
   get_ploted()
 })
