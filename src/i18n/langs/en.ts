@@ -5,7 +5,8 @@ export default {
   },
   noti: {
     title: 'Notice',
-    message: 'Please read the user instructions first and check the box'
+    message: 'Please read the user instructions first and check the box',
+    copy: 'You have successfully copied'
   },
   button: {
     confirm: 'confirm',
@@ -115,6 +116,7 @@ export default {
     btn_res: 'View results'
   },
   result_page: {
+    Hnumber: 'Hospital number: ',
     id: 'ID:',
     gender: 'Gender:',
     age: 'Age: ',

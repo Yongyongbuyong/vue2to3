@@ -237,7 +237,7 @@ const copyToClipboard = async (content: string) => {
 const onCopyResult = () => {
   copyToClipboard(genCopyData())
   ElMessage({
-    message: '你已成功复制',
+    message: i18n.global.t('noti.copy'),
     type: 'success',
     center: true
   })
@@ -280,7 +280,7 @@ onBeforeMount(() => {
 
       <div v-if="info.patient">
         <!-- v-if = "isPatient" -->
-        <span class="l-form-label">住院号: </span>
+        <span class="l-form-label">{{ $t('result_page.Hnumber') }}</span>
         <span class="plain-txt">{{ info.patient }}</span>
         <hr class="hr1" />
       </div>

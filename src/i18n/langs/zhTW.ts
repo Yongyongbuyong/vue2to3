@@ -5,7 +5,8 @@ export default {
   },
   noti: {
     title: '注意',
-    message: '請先閱讀用戶須知並勾選'
+    message: '請先閱讀用戶須知並勾選',
+    copy: '你已成功複製'
   },
   button: {
     confirm: '確定',
@@ -106,6 +107,7 @@ export default {
     btn_res: '查看結果'
   },
   result_page: {
+    Hnumber: '住院號: ',
     id: '編號：',
     gender: '性別：',
     age: '年齡：',

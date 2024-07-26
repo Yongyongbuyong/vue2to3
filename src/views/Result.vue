@@ -167,27 +167,72 @@ function resetGlobalData() {
 
 const genCopyData = () => {
   let ret = ''
-  ret += '编号：' + info.id + '\n'
+  ret += i18n.global.t('result_page.id') + info.id + '\n'
   if (userStore.gId == 1) {
-    ret += '姓名：' + info.name + '\n'
+    ret += i18n.global.t('info_page.name') + info.name + '\n'
   }
-  ret += '性别：' + info.sex + '\n'
-  ret += '年龄：' + info.age + '\n'
+  ret += i18n.global.t('result_page.gender') + info.sex + '\n'
+  ret += i18n.global.t('result_page.age') + info.age + '\n'
   if (userStore.gId == 1) {
-    ret += '住院号：' + info.patient + '\n'
+    ret += i18n.global.t('info_page.patient_id') + info.patient + '\n'
   }
-  ret += '十秒抓握次数：左手 ' + analyse.left_count + ' 次，右手 ' + analyse.right_count + ' 次\n'
-  ret += '平均抓握时间：左手 ' + left_atime.value + ' 秒，右手 ' + right_atime.value + ' 秒\n'
-  ret += '最高抓握速度：左手 ' + analyse.left_vmax + ' GPM，右手 ' + analyse.right_vmax + ' GPM\n'
-  ret += '最低抓握速度：左手 ' + analyse.left_vmin + ' GPM，右手 ' + analyse.right_vmin + ' GPM\n'
-  ret += '变异系数：左手 ' + analyse.left_vCV + ' %，右手 ' + analyse.right_vCV + ' %\n'
-  ret += '补充信息评分：mJOA评分为 ' + info.mjoa_score + ' 分\n'
   ret +=
-    '检测结论：根据十秒抓握实验结果，预测您的手部灵活性等级为 ' +
+    i18n.global.t('result_page.times') +
+    i18n.global.t('result_page.left_hand') +
+    analyse.left_count +
+    i18n.global.t('result_page.times1') +
+    ', ' +
+    i18n.global.t('result_page.right_hand') +
+    analyse.right_count +
+    i18n.global.t('result_page.times1') +
+    '\n'
+  ret +=
+    i18n.global.t('result_page.avg_time') +
+    i18n.global.t('result_page.left_hand') +
+    left_atime.value +
+    i18n.global.t('result_page.times1') +
+    ', ' +
+    i18n.global.t('result_page.right_hand') +
+    right_atime.value +
+    i18n.global.t('result_page.times1') +
+    '\n'
+  ret +=
+    i18n.global.t('result_page.max_speed') +
+    ': ' +
+    i18n.global.t('result_page.left_hand') +
+    analyse.left_vmax +
+    ' GPM, ' +
+    i18n.global.t('result_page.right_hand') +
+    analyse.right_vmax +
+    ' GPM\n'
+  ret +=
+    i18n.global.t('result_page.min_speed') +
+    ': ' +
+    i18n.global.t('result_page.left_hand') +
+    analyse.left_vmin +
+    ' GPM, ' +
+    i18n.global.t('result_page.right_hand') +
+    analyse.right_vmin +
+    ' GPM\n'
+  ret +=
+    i18n.global.t('result_page.变异系数') +
+    i18n.global.t('result_page.left_hand') +
+    analyse.left_vCV +
+    '%, ' +
+    i18n.global.t('result_page.right_hand') +
+    analyse.right_vCV +
+    '%\n'
+  ret +=
+    i18n.global.t('result_page.补充信息评分') +
+    i18n.global.t('result_page.info') +
+    info.mjoa_score +
+    '\n'
+  ret +=
+    i18n.global.t('result_page.result_half1') +
     info.result +
-    '。根据以上结果，建议您 ' +
+    i18n.global.t('result_page.result_half2') +
     suggest.text +
-    '。\n'
+    '\n'
   return ret
 }
 const copyToClipboard = async (content: string) => {
@@ -201,7 +246,7 @@ const copyToClipboard = async (content: string) => {
 const onCopyResult = () => {
   copyToClipboard(genCopyData())
   ElMessage({
-    message: '你已成功复制',
+    message: i18n.global.t('noti.copy'),
     type: 'success',
     center: true
   })

@@ -7,7 +7,7 @@ import { useUserStore } from '@/stores/user'
 const userStore = useUserStore()
 
 let myChartOption = reactive({
-  xData: ['左手', '右手'], //横坐标
+  xData: [i18n.global.t('result_page.left_hand'), i18n.global.t('result_page.right_hand')], //横坐标
   left: [0, 0],
   right: [0, 0],
   myChartStyle: {
@@ -34,7 +34,7 @@ function initEcharts() {
   // 多列柱状图
   const mulColumnZZTData = {
     xAxis: {
-      data: myChartOption.xData
+      data: [i18n.global.t('result_page.left_hand'), i18n.global.t('result_page.right_hand')]
     },
     // 图例
     legend: {
