@@ -4,6 +4,7 @@ import router from '@/router'
 import axios from 'axios'
 import { ElMessage, ElMessageBox } from 'element-plus'
 import { useUserStore } from '@/stores/user'
+import i18n from "@/i18n";
 const userStore = useUserStore()
 
 // let fileUrl = ref('')
@@ -22,7 +23,7 @@ const beforeUpload = (file: any) => {
   const isLt30M = file.size / 1024 / 1024 < 30
 
   if (!isLt30M) {
-    ElMessage.error('上传视频大小不能超过 30MB!')
+    ElMessage.error(i18n.global.t('camera_page.notLarge30MB') )
   }
   return isLt30M
 }
@@ -36,8 +37,8 @@ const upload = (params: any) => {
       onSuccess()
     })
     .catch(() => {
-      ElMessageBox.alert('未上传成功，请重新尝试上传！', '提示', {
-        confirmButtonText: '确认',
+      ElMessageBox.alert(i18n.global.t('camera_page.retryUpload'), i18n.global.t('camera_page.prompt'), {
+        confirmButtonText: i18n.global.t('camera_page.confirm'),
         callback: () => {}
       })
       console.log('error upload!!!!')
@@ -53,8 +54,9 @@ const handlePreview = (file: any) => {
 }
 
 const handleExceed = (files: any, fileList: any) => {
+  let length=files.length + fileList.length
   ElMessage.warning(
-    `当前限制选择 1 个文件，本次选择了 ${files.length} 个文件，共选择了 ${files.length + fileList.length} 个文件`
+    '当前限制选择 1 个文件，本次选择了'+ files.length+ '个文件，共选择了' + length +'个文件'
   )
 }
 
@@ -88,11 +90,11 @@ const onSuccess = () => {
       :file-list="fileList"
     >
       <el-button size="normal" type="info" round
-        >上传视频文件<el-icon><UploadFilled /></el-icon
+        >{{$t('camera_page.btn_upload_file')}}<el-icon><UploadFilled /></el-icon
       ></el-button>
     </el-upload>
-    <div v-if="hand === 0" class="el-upload__tip">请上传左手的视频</div>
-    <div v-if="hand === 1" class="el-upload__tip">请上传右手的视频</div>
+    <div v-if="hand === 0" class="el-upload__tip">{{$t('camera_page.description1')}}</div>
+    <div v-if="hand === 1" class="el-upload__tip">{{$t('camera_page.description2')}}</div>
   </div>
 </template>
 

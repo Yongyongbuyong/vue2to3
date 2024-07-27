@@ -43,7 +43,6 @@ export default {
     normal_title: 'Outpatient Basic Information Entry Page',
     patient_title: 'Patient Basic Information Entry Page',
     description: 'Designed by SCUT & GDPH',
-
     coopration: 'Developed by SCUT',
     name: 'Name:',
     name_text: 'Please enter your name',
@@ -63,7 +62,23 @@ export default {
     note: 'Note: The above information is very important for an accurate assessment of hand function in cervical spine, so please make sure you fill it out accurately.',
     iswith:
       'Fields with an * indicate required information, while fields without an * indicate optional information',
-    start: 'Start recording video'
+    start: 'Start recording video',
+    ageError:'Age cannot be empty',
+    inputNum:'Please input number',
+    notSuper99:'Not more than 99 years old',
+    inputRightPhone:'Please enter the correct mobile phone number',
+    none:'None',
+    chooseSex:'Please select sex',
+    inputAge:'Please enter your age',
+    inputPatientId:'Please enter the patient ID',
+    numberLength:'Length between 8 and 11 characters',
+    choosePatientType:'Please select patient type',
+    confirmInfoRight:'Is the information correct?',
+    yes:'Yes',
+    checkAgain:'Check again',
+    tip:'Prompt',
+    inputPhone:'Please input phone number',
+    inputName:'Please input name'
   },
   tutorial_page: {
     title: 'Record Tutorial Page',
@@ -75,7 +90,8 @@ export default {
     btn1: 'Record left-handed videos.',
     btn2: 'Record right-handed videos.',
     btn3: 'Additional information.',
-    btn4: 'Start testing.'
+    btn4: 'Start testing.',
+    finishAll: 'Please complete all steps first.'
   },
   mJOA_page: {
     title: 'mJOA Score ',
@@ -107,6 +123,20 @@ export default {
     A_sphincter_3: 'Marked difficulty with micturition',
     A_sphincter_4: 'Inability to urinate voluntarily',
     btn_submit: '提交'
+  },
+  camera_page: {
+    title: 'Video Recording Page',
+    prompt1: 'Please record or upload a 17-second video of hand grip.',
+    btn_upload_live: 'Upload the video just recorded',
+    btn_upload_file: 'Upload video file',
+    description1: 'Please upload the video of your left hand',
+    description2: 'Please upload the video of your right hand',
+    prompt:"Prompt",
+    confirm:'Confirm',
+    warningPart1:'The current limit is to select 1 file. This time, ',
+    warningPart2:' file has been selected, and a total of ',
+    warningPart3:' files have been selected',
+
   },
   thanks_page: {
     title: 'Thanks for your submission!',

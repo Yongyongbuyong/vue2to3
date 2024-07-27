@@ -47,7 +47,23 @@ export default {
     筛查: '篩查',
     note: '注: 以上信息對頸椎病手部功能的準確評估非常重要，請您務必準確填寫。',
     iswith: '帶*號代表必填訊息，不帶*代表選填訊息',
-    start: '開始錄製影片'
+    start: '開始錄製影片',
+    ageError:'年齡不能為空',
+    inputNum:'請輸入數字值',
+    notSuper99:'不超過99歲',
+    inputRightPhone:'請輸入正確的手機號碼',
+    none:'無',
+    chooseSex:'請選擇性別',
+    inputAge:'請輸入年齡',
+    inputPatientId:'請輸入住院號',
+    numberLength:'長度在 8 到 11 個字符',
+    choosePatientType:'請選擇病人類型',
+    confirmInfoRight:'確認信息準確無誤嗎？',
+    yes:'是',
+    checkAgain:'我再看看',
+    tip:'提示',
+    inputPhone:'請輸入手機號碼',
+    inputName:'請輸入姓名'
   },
   tutorial_page: {
     title: '錄製教程頁面',
@@ -59,7 +75,8 @@ export default {
     btn1: '錄製左手',
     btn2: '錄製右手',
     btn3: '補充信息',
-    btn4: '開始檢測'
+    btn4: '開始檢測',
+    finishAll: '請先完成所有步驟'
   },
   mJOA_page: {
     title: 'mJOA評分',
@@ -97,7 +114,12 @@ export default {
     btn_upload_live: '上傳剛錄製的視頻',
     btn_upload_file: '上傳視頻文件',
     description1: '請上傳左手的視頻',
-    description2: '請上傳右手的視頻'
+    description2: '請上傳右手的視頻',
+    prompt:'提示',
+    confirm:'確認',
+    warningPart1:'当前限制选择 1 个文件，本次选择了',
+    warningPart2:'个文件，共选择了',
+    warningPart3:'个文件',
   },
   thanks_page: {
     title: '感謝您的提交',

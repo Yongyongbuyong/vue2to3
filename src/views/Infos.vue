@@ -5,21 +5,22 @@ import { ElMessageBox } from 'element-plus'
 import axios from 'axios'
 import router from '@/router'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
+import {useI18n} from "vue-i18n";
+import i18n from "@/i18n";
 
 const store = useUserStore()
 
-const isLoading = ref(false)
-const infoCheck = ref(false)
+
 const checkAge = (rule: any, value: any, callback: any) => {
   if (!value) {
-    return callback(new Error('年龄不能为空'))
+    return callback(new Error(i18n.global.t('info_page.ageError') ))
   }
   setTimeout(() => {
     if (!Number.isInteger(value)) {
-      callback(new Error('请输入数字值'))
+      callback(new Error(i18n.global.t('info_page.inputNum')))
     } else {
       if (value > 99) {
-        callback(new Error('不超过99岁'))
+        callback(new Error(i18n.global.t('info_page.notSuper99')))
       } else {
         callback()
       }
@@ -32,63 +33,76 @@ const checkNumber = (rule: any, value: any, callback: any) => {
   }
   setTimeout(() => {
     if (!Number.isInteger(Number(value))) {
-      callback(new Error('请输入正确的电话号码'))
+      callback(new Error(i18n.global.t('info_page.inputRightPhone') ))
     } else {
       callback()
     }
   }, 1000)
 }
-
+let isLoading = ref(false)
+let infoCheck = ref(false)
 let ruleForm = reactive({
   name: '',
   tmp: '',
-  sex: -1,
+  sex: '',
   age: '',
   number: '',
   patient: '',
-  other: '无'
+  other: i18n.global.t('info_page.none')
 })
-
+//这是一个对表单实例的引用，允许你在方法中访问和操作表单组件本身。它通常用于调用表单的方法，如验证（validate）、重置（resetFields）等。
+const ruleFormRef = ref()
 let rules = reactive({
+  name: [
+    {
+      required: true,
+      message: i18n.global.t('info_page.inputName'),
+      trigger: 'change'
+    }
+  ],
   sex: [
     {
       required: true,
-      message: '请选择性别',
+      message: i18n.global.t('info_page.chooseSex'),
       trigger: 'change'
     }
   ],
   age: [
     {
       required: true,
-      message: '请输入您的年龄',
+      message: i18n.global.t('info_page.inputAge'),
       trigger: 'change'
     },
     { validator: checkAge, trigger: 'blur' }
   ],
-  patient: [{ required: true, message: '请输入您的住院号' }],
+  patient: [
+      { required: true,
+        message: i18n.global.t('info_page.inputPatientId'),
+        trigger: 'change'
+      }
+  ],
   number: [
-    { min: 8, max: 11, message: '长度在 8 到 11 个字符' },
+    { min: 8, max: 11, required: true, message: i18n.global.t('info_page.inputPhone') },
     { validator: checkNumber, trigger: 'blur' }
   ],
   other: [
     {
       required: true,
-      message: '请选择病人类型',
+      message: i18n.global.t('info_page.choosePatientType'),
       trigger: 'change'
     }
   ]
 })
-//这是一个对表单实例的引用，允许你在方法中访问和操作表单组件本身。它通常用于调用表单的方法，如验证（validate）、重置（resetFields）等。
-const ruleFormRef = ref()
 
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid) => {
     if (valid) {
-      ElMessageBox.confirm('确认信息准确无误吗？', '', {
-        confirmButtonText: '确定',
-        cancelButtonText: '我再看看',
-        center: true
+      ElMessageBox.confirm(i18n.global.t('info_page.confirmInfoRight'), i18n.global.t('info_page.tip'), {
+        confirmButtonText: i18n.global.t('info_page.yes'),
+        cancelButtonText: i18n.global.t('info_page.checkAgain'),
+        //center: true
+        roundButton: true
       })
         .then(() => {
           isLoading.value = true

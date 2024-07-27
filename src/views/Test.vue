@@ -102,13 +102,13 @@ function upload() {
 
 <template>
   <div>
-    <h1>视频录制页面</h1>
+    <h1>{{$t('camera_page.title')}}</h1>
     <video id="myVideo" class="video-js vjs-default-skin mirrored-video" playsinline></video>
     <div>
-      <span class="note-txt">请录制或上传17秒的手部抓握视频</span>
+      <span class="note-txt">{{$t('camera_page.prompt1')}}</span>
       <div></div>
     </div>
-    <el-button type="primary" size="default" @click="upload" round>上传刚录制的视频</el-button>
+    <el-button type="primary" size="default" @click="upload" round>{{$t('camera_page.btn_upload_live')}}</el-button>
     <Test1 style="margin-top: 10px" />
   </div>
 </template>

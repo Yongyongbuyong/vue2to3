@@ -47,7 +47,23 @@ export default {
     筛查: '筛查',
     note: '注: 以上信息对颈椎病手部功能的准确评估非常重要，请您务必准确填写。',
     iswith: '带*号代表着必填信息，不带*代表着选填信息',
-    start: '开始录制视频'
+    start: '开始录制视频',
+    ageError:'年龄不能为空',
+    inputNum:'请输入数字值',
+    notSuper99:'不超过99岁',
+    inputRightPhone:'请输入正确的手机号码',
+    none:'无',
+    chooseSex:'请选择性别',
+    inputAge:'请输入年龄',
+    inputPatientId:'请输入住院号',
+    numberLength:'长度在 8 到 11 个字符',
+    choosePatientType:'请选择病人类型',
+    confirmInfoRight:'确认信息准确无误吗？',
+    yes:'是',
+    checkAgain:'我再看看',
+    tip:'提示',
+    inputPhone:'请输入电话号码',
+    inputName:'请输入姓名'
   },
   tutorial_page: {
     title: '录制教程页面',
@@ -59,7 +75,8 @@ export default {
     btn1: '录制左手',
     btn2: '录制右手',
     btn3: '补充信息',
-    btn4: '开始检测'
+    btn4: '开始检测',
+    finishAll: '请先完成所有步骤'
   },
   mJOA_page: {
     title: 'mJOA评分',
@@ -97,7 +114,14 @@ export default {
     btn_upload_live: '上传刚录制的视频',
     btn_upload_file: '上传视频文件',
     description1: '请上传左手的视频',
-    description2: '请上传右手的视频'
+    description2: '请上传右手的视频',
+    notLarge30MB:'上传视频大小不能超过 30MB!',
+    retryUpload:'未上传成功，请重新尝试上传！',
+    prompt:"提示",
+    confirm:'确认',
+    warningPart1:'当前限制选择 1 个文件，本次选择了',
+    warningPart2:'个文件，共选择了',
+    warningPart3:'个文件',
   },
   thanks_page: {
     title: '感谢您的提交',
@@ -148,4 +172,5 @@ export default {
     graph_title: '抓握速度分析表(单位：GPM)',
     note: '本结果仅供参考，不做正式诊断用途，有疑问请咨询脊柱外科医生，欢迎致电020-83827812-61010。十秒抓握试验分析结果参考Machino. Clin Neurol Neurosurg. 2019; Yukawa. J Orthop Sci. 2013'
   }
+
 }

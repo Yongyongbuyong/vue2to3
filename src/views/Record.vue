@@ -5,8 +5,10 @@ import { useUserStore } from '@/stores/user'
 import router from '@/router'
 import { ElMessage } from 'element-plus'
 import axios from 'axios'
+import {useI18n} from "vue-i18n";
+import i18n from "@/i18n";
 const userStore = useUserStore()
-
+const {t} = useI18n()
 let cFailed = ref(userStore.cFailed)
 let cLoading = ref(userStore.cLoading)
 let cFinish = ref(userStore.cFinish)
@@ -37,7 +39,7 @@ function onQs() {
 function onCheckFail() {
   ElMessage({
     showClose: true,
-    message: '请先完成所有步骤',
+    message: i18n.global.t('tutorial_page.finishAll'),
     type: 'error'
   })
 }
