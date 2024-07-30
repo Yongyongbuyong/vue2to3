@@ -39,6 +39,7 @@ let note = ref(i18n.global.t('result_page.note'))
 let isSubmitValidate = ref(false)
 
 const video_url = computed(() => {
+  // ${userStore.gId}
   return 'http://42.193.155.226:3000/app/data/' + 2861 + '/output.mp4'
 })
 const errorResult = computed(() => {

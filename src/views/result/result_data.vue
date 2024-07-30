@@ -10,14 +10,14 @@ import { ElMessage } from 'element-plus'
 
 let isPatient = ref(false)
 let info = reactive({
-  id: -1,
+  id: 0,
   name: '',
-  sex: -1,
-  age: -1,
+  sex: 0,
+  age: 0,
   patient: '',
   // left_atime: "",
   // right_atime: "",
-  mjoa_score: -1,
+  mjoa_score: 0,
   result: ''
   // left_check: false,
   // right_check: false,

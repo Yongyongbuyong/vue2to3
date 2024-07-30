@@ -14,6 +14,7 @@ import { reactive } from 'vue'
 const userStore = useUserStore()
 
 const player = ref<any>(null)
+const myVideo = ref(null)
 
 let options = reactive({
   maxLength: false,
@@ -47,32 +48,49 @@ const url = computed(() =>
 )
 
 onMounted(() => {
-  player.value = videojs('#myVideo', options, () => {
-    console.log(
-      `Using video.js ${videojs} with videojs-record ${videojs.getPluginVersion('record')} and recordrtc ${RecordRTC.version}`
-    )
-  })
+  if (myVideo.value) {
+    const options = {
+      controls: true,
+      autoplay: false,
+      preload: 'auto',
+      // 这里可以添加其他 videojs-record 的配置选项
+      plugins: {
+        record: {
+          audio: true,
+          video: true,
+          maxLength: 17,
+          debug: true
+        }
+      }
+    }
 
-  player.value.on('deviceReady', () => {
-    console.log('device is ready!')
-  })
+    player.value = videojs(myVideo.value, options, () => {
+      console.log(
+        `Using video.js ${videojs} with videojs-record ${videojs.getPluginVersion('record')} and recordrtc ${RecordRTC.version}`
+      )
+    })
 
-  player.value.on('startRecord', () => {
-    console.log('started recording!')
-  })
+    player.value.on('deviceReady', () => {
+      console.log('device is ready!')
+    })
 
-  player.value.on('finishRecord', () => {
-    console.log('finished recording: ', player.value?.recordedData)
-  })
+    player.value.on('startRecord', () => {
+      console.log('started recording!')
+    })
 
-  player.value.on('error', (element: any, error: any) => {
-    console.warn(error)
-  })
+    player.value.on('finishRecord', () => {
+      console.log('finished recording: ', player.value?.recordedData)
+    })
 
-  player.value.on('deviceError', () => {
-    console.error('device error:', player.value?.deviceErrorCode)
-    alert('找不到摄像头！')
-  })
+    player.value.on('error', (element: any, error: any) => {
+      console.warn(error)
+    })
+
+    player.value.on('deviceError', () => {
+      console.error('device error:', player.value?.deviceErrorCode)
+      alert('找不到摄像头！')
+    })
+  }
 })
 
 onBeforeUnmount(() => {
@@ -102,13 +120,15 @@ function upload() {
 
 <template>
   <div>
-    <h1>{{$t('camera_page.title')}}</h1>
-    <video id="myVideo" class="video-js vjs-default-skin mirrored-video" playsinline></video>
+    <h1>{{ $t('camera_page.title') }}</h1>
+    <video ref="myVideo" class="video-js vjs-default-skin mirrored-video" playsinline></video>
     <div>
-      <span class="note-txt">{{$t('camera_page.prompt1')}}</span>
+      <span class="note-txt">{{ $t('camera_page.prompt1') }}</span>
       <div></div>
     </div>
-    <el-button type="primary" size="default" @click="upload" round>{{$t('camera_page.btn_upload_live')}}</el-button>
+    <el-button type="primary" size="default" @click="upload" round>{{
+      $t('camera_page.btn_upload_live')
+    }}</el-button>
     <Test1 style="margin-top: 10px" />
   </div>
 </template>
@@ -137,5 +157,10 @@ function upload() {
   font-size: 35rpx; /* 你可能需要调整这个值来适应新的界面布局 */
   margin-bottom: 0px;
   text-align: center;
+}
+/* 固定视频元素的尺寸 */
+.video-js {
+  width: 480px;
+  height: 360px;
 }
 </style>
