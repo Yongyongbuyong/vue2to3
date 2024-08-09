@@ -27,7 +27,7 @@ import Record from './Record.vue'
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import router from '@/router'
 let videoSrc = ref(
-  'https://6876-hvc-cloud-9ge10myz6e6ceea2-1304550954.tcb.qcloud.la/tutorial_video_small.mp4?sign=e3cfe3686e0a14893b422a167142dce8&t=1620975471'
+  'https://tutorial-hvc.oss-cn-beijing.aliyuncs.com/tutorial.mp4?Expires=1722478574&OSSAccessKeyId=TMP.3Kh7KsCwvnnMYE2j6MiwzZQXrsRtkbEKqre4CGstVwv5ZdtADhfx7pAbQz9CMPDL7mYGZdKH3DF4mzeeYyqchWdcZiKwvw&Signature=VP8%2F2L7XW5UE2Fkqq3gX4XXfV6E%3D'
 )
 let showBegin = ref(false)
 let second = ref(5)

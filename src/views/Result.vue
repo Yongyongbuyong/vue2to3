@@ -39,8 +39,8 @@ let note = ref(i18n.global.t('result_page.note'))
 let isSubmitValidate = ref(false)
 
 const video_url = computed(() => {
-  // ${userStore.gId}
-  return 'http://42.193.155.226:3000/app/data/' + 2861 + '/output.mp4'
+  // ${userStore.gId} 2861
+  return 'http://42.193.155.226:3000/app/data/' + userStore.gId + '/output.mp4'
 })
 const errorResult = computed(() => {
   console.log(analyse.left_count)
@@ -127,7 +127,7 @@ watch(
 const get = async () => {
   // `d-info/${userStore.gId}/get`
   try {
-    const response = await axios.get('d-info/' + 2861 + '/get')
+    const response = await axios.get(`d-info/4925/get`)
     console.log(response.data)
     // 更新 info 对象的属性
     Object.assign(info, response.data.info)
@@ -144,7 +144,7 @@ const video = ref(null)
 const get_ploted = async () => {
   try {
     // `d-count/${userStore.gId}/ploted_video`
-    const response = await axios.get('d-count/' + 2861 + '/ploted_video')
+    const response = await axios.get(`d-count/4925/ploted_video`)
     console.log(response.data)
     video.value = response.data
   } catch (error) {

@@ -79,7 +79,7 @@ function getChartUpdate() {
 function get() {
   axios
     // .get('d-info/' + userStore.gId + '/get')
-    .get('d-info/' + 2861 + '/get')
+    .get('d-info/' + 4925 + '/get')
     .then((response) => {
       console.log(response.data)
       analyse = response.data.analyse

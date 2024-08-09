@@ -167,7 +167,7 @@ watchEffect(() => {
 const get = async () => {
   // `d-info/${userStore.gId}/get`
   try {
-    const response = await axios.get('d-info/' + 2861 + '/get')
+    const response = await axios.get(`d-info/4925/get`)
     console.log(response.data)
     // 更新 info 对象的属性
     Object.assign(info, response.data.info)
@@ -186,7 +186,7 @@ const video = ref(null)
 const get_ploted = async () => {
   try {
     // `d-count/${userStore.gId}/ploted_video`
-    const response = await axios.get('d-count/' + 2861 + '/ploted_video')
+    const response = await axios.get(`d-count/4925/ploted_video`)
     console.log(response.data)
     video.value = response.data
   } catch (error) {
