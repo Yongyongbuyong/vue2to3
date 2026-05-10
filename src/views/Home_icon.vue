@@ -7,8 +7,8 @@
         <div class="avatar">
           <img class="circleImg" src="../assets/scut.jpg" />
 
-          <div class="txt-avatar">×</div>
-          <img class="circleImg" src="../assets/gdph.jpg" />
+          <!-- <div class="txt-avatar">×</div>
+          <img class="circleImg" src="../assets/gdph.jpg" /> -->
         </div>
       </div>
     </div>

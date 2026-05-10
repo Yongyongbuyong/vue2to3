@@ -22,28 +22,28 @@ export default {
     phone_number: 'Number: '
   },
   home: {
-    title: 'Intelligent Cervical Spine Function Assessment Analysis Tool',
+    title: 'Intelligent cervical spondylosis auxiliary diagnosis tool',
     description:
-      "The intelligent cervical spine function assessment and analysis tool jointly developed by South China University of Technology and Guangdong Provincial People's Hospital. It can evaluate the cervical spine function by analyzing hand grasp-and-release motions, and provide reference for the diagnosis of cervical spine diseases.",
+      'A team from the School of Software at South China University of Technology has developed an intelligent auxiliary diagnosis tool for cervical spondylosis. Through hand key point positioning and multi-modal hand grasping motion analysis, it comprehensively evaluates cervical spine function and provides a reference for auxiliary diagnosis of cervical spondylosis.',
     btn_normal: 'I am not a hospitalized patient',
     btn_hospital: 'I am a hospitalized patient',
     text_read: 'I have read and agree',
     note: '<User Guide>',
-    version: '1.1',
+    version: '2.0',
     tips:
-      'Please read carefully (minors should be accompanied by a guardian to read) and fully understand the terms of the "User Instructions" before using this applet. By ticking the box "I have read and agree to the Terms of Use", you agree to the contents of the Terms of Use. Unless you read and agree to the contents of the User Notice, you are not authorised to use this applet.\n' +
-      "1. This applet is jointly developed by South China University of Technology and Guangdong Provincial People's Hospital. All copyrights and other intellectual property rights of this applet, as well as all information content related to the applet, including but not limited to: textual expressions and their combinations, icons, illustrations, charts, colours, interface design, layout frameworks, relevant data, printed materials, or electronic documents, etc. are jointly owned by the South China University of Technology and the Guangdong Provincial People's Hospital, and are protected by copyright laws and international copyright treaties, as well as other intellectual property laws and regulations.The applet is only for roughing.\n" +
-      '2. This applet is only for rough assessment of hand function and to roughly determine the risk of cervical spondylosis, the results of the assessment are for reference only, and cannot be used as a basis for diagnosis or clinical diagnosis and treatment.Users should go to the hospital for further consultation.\n' +
-      "3. Images and analysis data uploaded through this applet are for disease screening and clinical research purposes only, and are not to be used for other purposes.South China University of Technology and Guangdong Provincial People's Hospital respect and protect the personal privacy of all users and will not voluntarily disclose them to any third party.\n" +
-      '4. Users shall not use this applet to publish, transmit, disseminate or store content that violates national laws, endangers national security, unification of the motherland, social stability, or any inappropriate, insulting or defamatory, obscene, violent or any content that violates national laws and regulations and policies.Do not use this applet to publish, transmit, disseminate, or store any content that infringes on the intellectual property rights, trade secret rights, or other legal rights of others.Do not use this applet to mislead or deceive others.\n' +
-      "5. The consequences of using this applet are at the user's own risk, and South China University of Technology and Guangdong Provincial People's Hospital do not make any type of guarantee for the consequences of using this applet, including but not limited to the results of diagnostic evaluation, assessment of the condition, assessment of the results of the hand activity and any impact thereof.\n" +
-      "6. The right of interpretation and modification of this User Guide belongs to South China University of Technology and Guangdong Provincial People's Hospital."
+      'Before using this program, please carefully read (minors should read with their guardians) and fully understand the terms in this "User Notice". Checking "I have read and agreed to the User Notice" and using this program will represent that you agree to the contents of this User Notice. Unless you read and agree to the contents of this User Notice, you have no right to use this program. \n' +
+      '1. This program is developed by the School of Software of South China University of Technology. All copyrights and other intellectual property rights of this program, as well as all information content related to the program, including but not limited to: text expressions and their combinations, icons, decorations, charts, colors, interface design, layout framework, relevant data, printed materials, or electronic documents, are owned by the School of Software of South China University of Technology and are protected by copyright law and international copyright treaties and other intellectual property laws and regulations. \n' +
+      '2. This program is only used to roughly evaluate hand function and to roughly judge the risk of cervical spondylosis in the tester. The results of the evaluation are for reference only and cannot be used as a basis for diagnosis or clinical diagnosis and treatment. Users should go to the hospital for further consultation. \n' +
+      '3. The images and analysis data uploaded through this program are only for disease screening and clinical research purposes and shall not be used for other purposes. The School of Software of South China University of Technology respects and protects the personal privacy of all users and will not actively disclose it to any third party. \n' +
+      '4. Users shall not use this program to publish, transmit, disseminate, or store content that violates national laws, endangers national security, national unity, and social stability, or any inappropriate, insulting, defamatory, obscene, violent, or any content that violates national laws, regulations, and policies. This program shall not be used to publish, transmit, disseminate, or store content that infringes on the intellectual property rights, trade secrets, and other legal rights of others. This program shall not be used to mislead or deceive others. \n' +
+      "5. The consequences of using this program are at the user's own risk. The School of Software of South China University of Technology does not make any type of guarantee for the consequences of using this program, including but not limited to the results of diagnostic assessment, disease assessment, hand activity assessment, and any effects thereof. \n" +
+      '6. All rights of interpretation and modification of this "User Notice" belong to the School of Software of South China University of Technology.'
   },
   info_page: {
-    normal_title: 'Outpatient Basic Information Entry Page',
-    patient_title: 'Patient Basic Information Entry Page',
-    description: 'Designed by SCUT & GDPH',
-    coopration: 'Developed by SCUT',
+    normal_title: 'Basic information entry for non-hospitalized patients',
+    patient_title: 'Basic information entry for inpatients',
+    description: 'Developed by School of Software, SCUT',
+    coopration: '',
     name: 'Name:',
     name_text: 'Please enter your name',
     gender: 'Gender: ',
@@ -52,36 +52,39 @@ export default {
     age: 'Age: ',
     phone_number: 'Number: ',
     age_text: 'Please enter your age (mandatory)',
-    phone_number_text: 'Please enter a contact phone number (optional)',
+    phone_number_text: 'Please enter a contact phone number (mandatory)',
+    Hospital_id: 'Hospital Name:',
+    Hospital_text: 'Please enter your hospital name (mandatory)',
     patient_id: 'Patient ID:',
     patient_text: 'Please enter your patient ID (mandatory)',
-    other: 'Other:',
+    other: 'Category:',
     no_text: 'No',
     术后随访: 'Postoperative follow-up',
-    筛查: 'Screening',
+    筛查: 'Preoperative diagnosis',
     note: 'Note: The above information is very important for an accurate assessment of hand function in cervical spine, so please make sure you fill it out accurately.',
     iswith:
       'Fields with an * indicate required information, while fields without an * indicate optional information',
     start: 'Start recording video',
-    ageError:'Age cannot be empty',
-    inputNum:'Please input number',
-    notSuper99:'Not more than 99 years old',
-    inputRightPhone:'Please enter the correct mobile phone number',
-    none:'None',
-    chooseSex:'Please select sex',
-    inputAge:'Please enter your age',
-    inputPatientId:'Please enter the patient ID',
-    numberLength:'Length between 8 and 11 characters',
-    choosePatientType:'Please select patient type',
-    confirmInfoRight:'Is the information correct?',
-    yes:'Yes',
-    checkAgain:'Check again',
-    tip:'Prompt',
-    inputPhone:'Please input phone number',
-    inputName:'Please input name'
+    ageError: 'Age cannot be empty',
+    inputNum: 'Please input number',
+    notSuper99: 'Not more than 99 years old',
+    inputRightPhone: 'Please enter the correct mobile phone number',
+    none: 'None',
+    chooseSex: 'Please select sex',
+    inputAge: 'Please enter your age',
+    inputHospitalId: 'Please enter the name of the hospital',
+    inputPatientId: 'Please enter the patient ID',
+    numberLength: 'Length between 8 and 11 characters',
+    choosePatientType: 'Please select patient type',
+    confirmInfoRight: 'Is the information correct?',
+    yes: 'Yes',
+    checkAgain: 'Check again',
+    tip: 'Prompt',
+    inputPhone: 'Please input phone number',
+    inputName: 'Please input name'
   },
   tutorial_page: {
-    title: 'Record Tutorial Page',
+    title: 'Hand grasping video recording and questionnaire information entry',
     prompt_left: 'Recording tutorial is very important, so be sure to watch it carefully!',
     prompt_right1: 'Please complete the following steps in order.',
     prompt_right2: 'Then click on the [Start Testing] button.',
@@ -89,7 +92,7 @@ export default {
     prompt_right4: 'Please wait patiently!',
     btn1: 'Record left-handed videos.',
     btn2: 'Record right-handed videos.',
-    btn3: 'Additional information.',
+    btn3: 'Questionnaire Information.',
     btn4: 'Start testing.',
     finishAll: 'Please complete all steps first.'
   },
@@ -125,18 +128,17 @@ export default {
     btn_submit: '提交'
   },
   camera_page: {
-    title: 'Video Recording Page',
-    prompt1: 'Please record or upload a 17-second video of hand grip.',
+    title: 'Video Recording',
+    prompt1: 'Please record or upload a 10-second video of hand grip.',
     btn_upload_live: 'Upload the video just recorded',
     btn_upload_file: 'Upload video file',
     description1: 'Please upload the video of your left hand',
     description2: 'Please upload the video of your right hand',
-    prompt:"Prompt",
-    confirm:'Confirm',
-    warningPart1:'The current limit is to select 1 file. This time, ',
-    warningPart2:' file has been selected, and a total of ',
-    warningPart3:' files have been selected',
-
+    prompt: 'Prompt',
+    confirm: 'Confirm',
+    warningPart1: 'The current limit is to select 1 file. This time, ',
+    warningPart2: ' file has been selected, and a total of ',
+    warningPart3: ' files have been selected'
   },
   thanks_page: {
     title: 'Thanks for your submission!',
@@ -155,23 +157,24 @@ export default {
     max_speed: 'Maximum grip speed',
     min_speed: 'Minimum grip speed',
     变异系数: 'Variation coefficient:',
-    补充信息评分: 'Supplementary information score: ',
-    检测结论: 'Testing conclusion: ',
+    补充信息评分: 'Questionnaire Rating:',
+    检测结论: 'Auxiliary diagnosis conclusion: ',
     left_hand: 'Left hand:',
     right_hand: 'Right hand:',
     second: 'seconds',
     times1: 'times',
     // 补充信息: MJOA评分为
-    info: 'The mJOA score is',
-    title: 'Intelligent Cervical Spine Functional Assessment and Analysis',
-    video_text: 'Hand Keypoint Recognition Video: ',
-    failure_text: '',
+    info: 'The mJOA score is ',
+    title: 'Intelligent cervical spondylosis auxiliary diagnosis results',
+    video_text: 'Key hand positioning:',
+    failure_text:
+      'There was a problem during your detection process. Please keep the network open, relax your fingers, take a deep breath, and click the Redetect button below to try again.',
     btn_re: 'Re-detection',
     btn_home: 'Testing completed',
     btn_copy: 'Copy the result',
     note_title: 'Notes:',
     note_text:
-      'This result is for reference only, not for formal diagnostic purposes, please consult the spine surgeon if you have any questions, please feel free to call 020-83827812-61010.Ten-second grip-and-release test analysis results are referenced in Machino.Clin Neurol Neurosurg. 2019; Yukawa.J Orth op Sci. 2013',
+      'The results are for reference only and are not intended for formal diagnosis. The results of the 10-second grip test are based on Liang et al., Spine 2024; Ye et al., Neurospine 2024; Machino. Clin Neurol Neurosurg. 2019; Yukawa. J Orthop Sci. 2013',
     result_half1:
       'Based on the results of the ten-second grip-and-release test, your manual dexterity rating is predicted to be ',
     result_half2: '. Based on these results, it is recommended that you ',
@@ -191,6 +194,6 @@ export default {
       level4: 'Poor'
     },
     graph_title: 'Grip Speed Analysis Chart (Unit: GPM)',
-    note: 'This result is for reference only and is not intended for formal diagnosis. If you have any questions, please consult a spinal surgeon. Please call 020-83827812-61010. The results of the 10-second grip test are available from Machino. Clin Neurol Neurosurg. 2019; Yukawa. J Orthop Sci. 2013'
+    note: 'The results are for reference only and are not intended for formal diagnosis. The results of the 10-second grip test are based on Liang et al., Spine 2024; Ye et al., Neurospine 2024; Machino. Clin Neurol Neurosurg. 2019; Yukawa. J Orthop Sci. 2013'
   }
 }

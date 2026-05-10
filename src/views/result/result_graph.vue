@@ -13,7 +13,7 @@ let myChartOption = reactive({
   myChartStyle: {
     float: 'center',
     width: '80%',
-    height: '200px'
+    height: '220px'
   } //图表样式
 })
 
@@ -78,8 +78,8 @@ function getChartUpdate() {
 
 function get() {
   axios
-    // .get('d-info/' + userStore.gId + '/get')
-    .get('d-info/' + 4925 + '/get')
+    .get('d-info/' + userStore.gId + '/get')
+    // .get('d-info/' + 2861 + '/get')
     .then((response) => {
       console.log(response.data)
       analyse = response.data.analyse
@@ -113,31 +113,38 @@ watch(i18n.global.locale, () => {
 </script>
 
 <template>
-  <div>
+  <div class="chart-container">
     <div class="l-form-label">{{ $t('result_page.graph_title') }}</div>
-    <div
-      class="echart"
-      id="mychart"
-      :style="myChartOption.myChartStyle"
-      style="margin-left: 10%"
-    ></div>
+    <div class="echart" id="mychart" :style="myChartOption.myChartStyle" style="top: 20px"></div>
   </div>
 </template>
 
 <style scoped>
+.chart-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 85%; /* 减小整体宽度 */
+  height: auto; /* 高度自适应内容 */
+  max-width: 800px; /* 根据需要调整最大宽度 */
+  max-height: 600px; /* 根据需要调整最大高度 */
+}
+
 .l-form-label {
-  /* float: left; */
-
-  font-size: 25rpx;
+  font-size: 16px;
   font-weight: bold;
-  color: #566573;
-
-  /* opacity: 20%; */
-  /* margin-left: 10%; */
+  color: #33393e;
   text-align: center;
-  margin-top: 5%;
-  margin-bottom: 2%;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 
-  /* margin-left: 30%; */
+.echart {
+  width: 100%; /* 使 echart 宽度适应容器 */
+  height: 250px; /* 根据需要设置高度 */
+  background: #f9f9f9;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding-top: 25px; /* 调整这个值来控制容器顶部的间隔 */
 }
 </style>

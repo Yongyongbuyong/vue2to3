@@ -5,12 +5,12 @@ import { ElMessageBox } from 'element-plus'
 import axios from 'axios'
 import router from '@/router'
 import type { ComponentSize, FormInstance, FormRules } from 'element-plus'
-import {useI18n} from "vue-i18n";
-import i18n from "@/i18n";
+import { useI18n } from 'vue-i18n'
+import i18n from '@/i18n'
 const userStore = useUserStore()
 const checkAge = (rule: any, value: any, callback: any) => {
   if (!value) {
-    return callback(new Error(i18n.global.t('info_page.ageError') ))
+    return callback(new Error(i18n.global.t('info_page.ageError')))
   }
   setTimeout(() => {
     if (!Number.isInteger(value)) {
@@ -30,7 +30,7 @@ const checkNumber = (rule: any, value: any, callback: any) => {
   }
   setTimeout(() => {
     if (!Number.isInteger(Number(value))) {
-      callback(new Error(i18n.global.t('info_page.inputRightPhone') ))
+      callback(new Error(i18n.global.t('info_page.inputRightPhone')))
     } else {
       callback()
     }
@@ -46,7 +46,7 @@ let ruleForm = reactive({
   age: '',
   number: '',
   patient: '',
-  other: i18n.global.t('info_page.none')
+  other: ''
 })
 const ruleFormRef = ref<FormInstance>()
 let rules = reactive({
@@ -76,12 +76,16 @@ const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return
   await formEl.validate((valid, fields) => {
     if (valid) {
-      ElMessageBox.confirm(i18n.global.t('info_page.confirmInfoRight'), i18n.global.t('info_page.tip'), {
-        confirmButtonText: i18n.global.t('info_page.yes'),
-        cancelButtonText: i18n.global.t('info_page.checkAgain'),
-        //center: true
-        roundButton: true
-      })
+      ElMessageBox.confirm(
+        i18n.global.t('info_page.confirmInfoRight'),
+        i18n.global.t('info_page.tip'),
+        {
+          confirmButtonText: i18n.global.t('info_page.yes'),
+          cancelButtonText: i18n.global.t('info_page.checkAgain'),
+          //center: true
+          roundButton: true
+        }
+      )
         .then(() => {
           isLoading.value = true
           axios
@@ -132,19 +136,19 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- <div>infos_normal</div> -->
-  <el-container class="bg-purple">
-    <div class="blur-box">
-      <el-main>
+  <div class="divh">
+    <el-container class="bg-purple">
+      <el-main class="blur-box">
         <h1 class="title">{{ $t('info_page.normal_title') }}</h1>
         <div style="display: flex">
           <!-- <div class="background-container"> -->
           <el-col :span="12">
             <!-- <div class="background-container"> -->
             <div>
+              <div class="IconStyle"></div>
               <img class="circleImg" src="../assets/scut.jpg" />
-              <div class="txt-avatar"></div>
-              <img class="circleImg" src="../assets/gdph.jpg" />
+              <!-- <div class="txt-avatar"></div>
+              <img class="circleImg" src="../assets/gdph.jpg" /> -->
             </div>
             <div class="grid-content">
               {{ $t('info_page.description') }}
@@ -154,14 +158,18 @@ onMounted(() => {
           <el-col :span="12">
             <div class="grid-content">
               <el-form
-                style="margin-top: 10%"
+                style="margin-top: 10%; max-width: 600px"
                 :model="ruleForm"
                 ref="ruleFormRef"
                 :rules="rules"
-                class="container"
-                label-position="left"
-                label-width="80px"
+                label-width="auto"
               >
+                <el-form-item :label="$t('info_page.name')" prop="name">
+                  <el-input
+                    v-model="ruleForm.name"
+                    :placeholder="$t('info_page.name_text')"
+                  ></el-input>
+                </el-form-item>
                 <el-form-item :label="$t('info_page.gender')" prop="sex">
                   <el-radio-group v-model="ruleForm.sex">
                     <el-radio value="0">{{ $t('info_page.male') }}</el-radio>
@@ -200,9 +208,7 @@ onMounted(() => {
             </div>
           </el-col>
         </div>
-      </el-main>
-      <div style="display: flex; justify-content: center">
-        <el-footer>
+        <div style="display: flex; justify-content: center; padding-top: 30px">
           <el-row>
             <el-button
               v-if="!infoCheck"
@@ -222,44 +228,52 @@ onMounted(() => {
               {{ $t('info_page.start') }}
             </el-button>
           </el-row>
-        </el-footer>
-      </div>
-    </div>
-  </el-container>
+        </div>
+      </el-main>
+    </el-container>
+  </div>
 </template>
 
-<style>
+<style scoped>
+::v-deep .el-form-item__label {
+  color: black;
+  font-size: 16px;
+}
 .circleImg {
   border-radius: 60px;
   width: 120px;
   height: 120px;
 }
 
+.IconStyle {
+  margin-top: 80px;
+}
+
 .el-header {
   /* background-color: #b3c0d1; */
-  color: #333;
+  color: #000000;
   text-align: center;
   line-height: 0px;
 }
 
 .el-footer {
   /* background-color: #b3c0d1; */
-  color: #333;
+  color: #000000;
   text-align: center;
   line-height: 100%;
 }
 
 .el-aside {
   /* background-color: #d3dce6; */
-  background-image: url('../assets/background.jpg');
-  color: #333;
+  /* background-image: url('../assets/background.jpg'); */
+  color: #000000;
   text-align: center;
   /* line-height: 200px; */
 }
 
 .el-main {
   /* background-color: #e9eef3; */
-  color: #333;
+  color: #000000;
   text-align: center;
   /* line-height: 160px; */
 }
@@ -267,7 +281,7 @@ onMounted(() => {
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   /* width: 400px; */
 }
 
@@ -282,19 +296,17 @@ onMounted(() => {
   display: inline-block;
 }
 
-.background-container {
-  /* 设置容器的宽高和其他样式 */
-  /* width: 100%; */
-  /* height: 200%; */
-  /* 设置背景图 */
-  background-image: url('../assets/background.jpg');
-  /* background-size: 200% 200%; 背景图的尺寸适应容器 */
-  /* background-position: right bottom; 背景图的位置 */
-}
-
 .bg-purple {
   background: #d3dce6;
   background-image: url('../assets/华南理工大学励吾科技楼（2007）.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; /* 确保图片居中 */
+  height: 100%; /* 确保容器有足够的高度 */
+  width: 100%; /* 确保容器有足够的宽度 */
+}
+.divh {
+  height: 630px !important;
 }
 
 .bg-purple-light {
@@ -318,8 +330,8 @@ onMounted(() => {
   /* height: 250px; */
   /* background-image: url("../assets/华南理工大学励吾科技楼（2007）.jpg"); */
   background-color: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(2px);
-
+  backdrop-filter: blur(3px);
+  padding-top: 40px;
   margin: 0 auto;
 }
 

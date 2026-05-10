@@ -68,7 +68,7 @@ const errorResult = computed(() => {
   return parseInt(analyse.left_count) < 5 || parseInt(analyse.right_count) < 5
 })
 const diagnosis = reactive({
-  resultText: ''
+  resultText: 'hello'
 })
 watch(
   () => [info.result, info.mjoa_score, i18n.global.locale.value], // 添加 i18n.global.locale.value
@@ -167,7 +167,7 @@ watchEffect(() => {
 const get = async () => {
   // `d-info/${userStore.gId}/get`
   try {
-    const response = await axios.get(`d-info/4925/get`)
+    const response = await axios.get(`d-info/${userStore.gId}/get`)
     console.log(response.data)
     // 更新 info 对象的属性
     Object.assign(info, response.data.info)
@@ -186,7 +186,7 @@ const video = ref(null)
 const get_ploted = async () => {
   try {
     // `d-count/${userStore.gId}/ploted_video`
-    const response = await axios.get(`d-count/4925/ploted_video`)
+    const response = await axios.get(`d-count/${userStore.gId}/ploted_video`)
     console.log(response.data)
     video.value = response.data
   } catch (error) {
@@ -252,10 +252,9 @@ onBeforeMount(() => {
 
 <template>
   <div>
-    <!-- <h1>颈椎病功能分析报告</h1> -->
-
     <div>
       <div class="hr"></div>
+      <div class="downxia"></div>
     </div>
     <div v-if="!errorResult" style="margin-right: 10%">
       <el-row style="margin-top: 5%">
@@ -313,9 +312,11 @@ onBeforeMount(() => {
         {{ i18n.global.t('result_page.second') }}，</span
       >
       <span class="plain-txt"
-        >{{ i18n.global.t('result_page.right_hand')
-        }}<span class="number-txt"> {{ right_atime }} </span
-        >{{ i18n.global.t('result_page.second') }}</span
+        >{{ i18n.global.t('result_page.right_hand') }}
+        <span class="number-txt">
+          {{ right_atime }}
+        </span>
+        {{ i18n.global.t('result_page.second') }}</span
       >
       <hr class="hr1" />
 
@@ -414,6 +415,10 @@ onBeforeMount(() => {
 </template>
 
 <style scoped>
+.downxia {
+  /* background-color: skyblue; */
+  height: 20px;
+}
 .hr {
   width: 100%;
   height: 3px;
@@ -452,7 +457,7 @@ onBeforeMount(() => {
 }
 
 .btn-txt {
-  font-size: 20rpx;
+  font-size: 18px;
   color: white;
   font-weight: bold;
 }
@@ -460,16 +465,16 @@ onBeforeMount(() => {
 .l-form-label {
   float: left;
 
-  font-size: 25rpx;
+  font-size: 17px;
   font-weight: bold;
-  color: #566573;
+  color: #2e3233;
 
   /* opacity: 20%; */
   margin-left: 10%;
 }
 .plain-txt {
-  font-size: 25rpx;
-  color: #08088a;
+  font-size: 19px;
+  color: #0f1b6a;
 
   /* text-align: right; */
 }
@@ -488,19 +493,19 @@ h1.title {
 
 .number-txt {
   font-family: 'Times New Roman', Times, serif;
-  font-size: 25rpx;
+  font-size: 19px;
   color: #298a08;
   font-weight: bold;
 }
 
 .danger-txt {
-  font-size: 26rpx;
+  font-size: 20px;
   color: red;
   font-weight: bold;
 }
 
 .result-txt {
-  font-size: 25rpx;
+  font-size: 18px;
   color: #08088a;
   line-height: 32rpx;
   text-align: left;
@@ -509,7 +514,7 @@ h1.title {
 }
 
 .l-note-label {
-  font-size: 25rpx;
+  font-size: 18px;
   font-weight: bold;
   /* margin-top: 20px; */
   margin-bottom: 0px;
@@ -530,7 +535,7 @@ h1.title {
 }
 
 .note2-txt {
-  font-size: 18rpx;
+  font-size: 18px;
   font-weight: bold;
   color: red;
   text-align: left;

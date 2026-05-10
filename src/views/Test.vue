@@ -35,7 +35,7 @@ let options = reactive({
       audio: false,
       video: true,
       debug: true,
-      maxLength: 17
+      maxLength: 10
     }
   }
 })
@@ -58,7 +58,7 @@ onMounted(() => {
         record: {
           audio: true,
           video: true,
-          maxLength: 17,
+          maxLength: 10,
           debug: true
         }
       }
@@ -119,27 +119,50 @@ function upload() {
 </script>
 
 <template>
-  <div>
-    <h1>{{ $t('camera_page.title') }}</h1>
-    <video ref="myVideo" class="video-js vjs-default-skin mirrored-video" playsinline></video>
-    <div>
-      <span class="note-txt">{{ $t('camera_page.prompt1') }}</span>
-      <div></div>
-    </div>
-    <el-button type="primary" size="default" @click="upload" round>{{
-      $t('camera_page.btn_upload_live')
-    }}</el-button>
-    <Test1 style="margin-top: 10px" />
+  <div class="divh">
+    <el-container class="bg-purple">
+      <el-main class="blur-box">
+        <h1>{{ $t('camera_page.title') }}</h1>
+        <video ref="myVideo" class="video-js vjs-default-skin mirrored-video" playsinline></video>
+        <div>
+          <span class="note-txt">{{ $t('camera_page.prompt1') }}</span>
+          <div></div>
+        </div>
+        <el-button type="primary" size="default" @click="upload" round>{{
+          $t('camera_page.btn_upload_live')
+        }}</el-button>
+        <Test1 style="margin-top: 15px" />
+      </el-main>
+    </el-container>
   </div>
 </template>
 
 <style scoped>
+.divh {
+  height: 630px !important;
+}
+.bg-purple {
+  background: #d3dce6;
+  background-image: url('../assets/华南理工大学励吾科技楼（2007）.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; /* 确保图片居中 */
+  height: 100%; /* 确保容器有足够的高度 */
+  width: 100%; /* 确保容器有足够的宽度 */
+}
+.blur-box {
+  width: 100%;
+  /* 宽度改成跟字一样长，字有多长，宽有多长 */
+
+  /* height: 250px; */
+  /* background-image: url("../assets/华南理工大学励吾科技楼（2007）.jpg"); */
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(3px);
+  /* padding-top: 15px; */
+  margin: 0 auto;
+}
 .el-main {
   text-align: center;
-  line-height: 160px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 #myVideo {
@@ -160,7 +183,10 @@ function upload() {
 }
 /* 固定视频元素的尺寸 */
 .video-js {
-  width: 480px;
-  height: 360px;
+  width: 40%;
+  height: 60%;
+  border-radius: 30px;
+  overflow: hidden; /* 防止内部元素溢出 */
+  box-shadow: none; /* 移除默认阴影 */
 }
 </style>

@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { onMounted } from 'vue'
+import { Icon } from '@iconify/vue'
 const { locale } = useI18n()
 
 const language = ref({
@@ -51,7 +52,7 @@ onMounted(() => {
   <div>
     <el-dropdown trigger="click" @command="changeLanguage">
       <span class="el-dropdown-link">
-        {{ language.title }} <el-icon><ArrowDown /></el-icon>
+        <Icon icon="ooui:language" width="20" height="20" />
       </span>
       <template v-slot:dropdown>
         <el-dropdown-menu>

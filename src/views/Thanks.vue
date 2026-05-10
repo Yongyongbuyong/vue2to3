@@ -38,24 +38,56 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <div class="note">
-      <h1 class="thanks">{{ $t('thanks_page.title') }}</h1>
-      <div class="note-txt">{{ $t('thanks_page.description1') }}</div>
-      <div class="note-txt">{{ $t('thanks_page.description2') }}</div>
-      <div class="note-txt">{{ $t('thanks_page.description3') }}</div>
-    </div>
+  <div class="divh">
+    <el-container class="bg-purple">
+      <el-main class="blur-box">
+        <div class="note">
+          <h1 class="thanks">{{ $t('thanks_page.title') }}</h1>
+          <div class="note-txt">{{ $t('thanks_page.description1') }}</div>
+          <div class="note-txt">{{ $t('thanks_page.description2') }}</div>
+          <div class="note-txt">{{ $t('thanks_page.description3') }}</div>
+        </div>
 
-    <el-button v-if="false" class="btn-txt" type="primary" round @click="backToHome"
-      ><el-icon><HomeFilled /></el-icon>现在返回首页</el-button
-    >
-    <el-button class="btn-txt" type="info" round :loading="cLoading" @click="toResult"
-      ><el-icon><Document /></el-icon>{{ $t('thanks_page.btn_res') }}</el-button
-    >
+        <div class="button-container">
+          <el-button v-if="false" class="btn-txt" type="primary" round @click="backToHome"
+            ><el-icon><HomeFilled /></el-icon>现在返回首页</el-button
+          >
+          <el-button class="btn-txt" type="primary" round :loading="cLoading" @click="toResult"
+            ><el-icon><Document /></el-icon>{{ $t('thanks_page.btn_res') }}</el-button
+          >
+        </div>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
-<style>
+<style scoped>
+.divh {
+  height: 630px !important;
+}
+.bg-purple {
+  background: #d3dce6;
+  background-image: url('../assets/华南理工大学励吾科技楼（2007）.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; /* 确保图片居中 */
+  height: 100%; /* 确保容器有足够的高度 */
+  width: 100%; /* 确保容器有足够的宽度 */
+}
+.blur-box {
+  width: 100%;
+  /* 宽度改成跟字一样长，字有多长，宽有多长 */
+
+  /* height: 250px; */
+  /* background-image: url("../assets/华南理工大学励吾科技楼（2007）.jpg"); */
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(3px);
+  padding-top: 15px;
+  margin: 0 auto;
+}
+.button-container {
+  text-align: center; /* 让容器内的内容居中 */
+}
 .container {
   height: 70vh;
   display: flex;

@@ -4,6 +4,8 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import VueSetupExtend from 'vite-plugin-vue-setup-extend'
+import fs from 'fs'
+import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -14,9 +16,13 @@ export default defineConfig({
     }
   },
   server: {
-    host: '127.0.0.1',
+    host: '0.0.0.0',
     port: 8080,
     // https 选项省略
+    // https: {
+    //   key: fs.readFileSync(path.resolve(__dirname, 'server.key')),
+    //   cert: fs.readFileSync(path.resolve(__dirname, 'server.crt'))
+    // },
     proxy: {
       '/api': {
         target: 'https://z-hand.site/',

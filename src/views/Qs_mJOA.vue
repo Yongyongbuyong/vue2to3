@@ -37,14 +37,14 @@ const onSubmit = () => {
 
 <template>
   <div>
+    <span class="title">{{ $t('mJOA_page.title') }}</span>
     <el-row>
-      <h1 class="title">{{ $t('mJOA_page.title') }}</h1>
       <div class="hr"></div>
       <el-col :span="12"
         ><div class="question">{{ $t('mJOA_page.Q_upper') }}</div>
         <div class="form_text">
           <el-radio-group v-model="form.limb" class="single-line-radio-group">
-            <el-radio value="5" >{{ $t('mJOA_page.A_upper_1') }}</el-radio>
+            <el-radio value="5">{{ $t('mJOA_page.A_upper_1') }}</el-radio>
             <el-radio value="4">{{ $t('mJOA_page.A_upper_2') }}</el-radio>
             <el-radio value="3">{{ $t('mJOA_page.A_upper_3') }}</el-radio>
             <el-radio value="2">{{ $t('mJOA_page.A_upper_4') }}</el-radio>
@@ -54,7 +54,7 @@ const onSubmit = () => {
         </div>
         <div class="hr1"></div>
         <div class="question">{{ $t('mJOA_page.Q_sensation') }}</div>
-        <div class="form_text" >
+        <div class="form_text">
           <el-radio-group v-model="form.feel" class="single-line-radio-group">
             <el-radio value="3">{{ $t('mJOA_page.A_sensation_1') }}</el-radio>
             <el-radio value="2">{{ $t('mJOA_page.A_sensation_2') }}</el-radio>
@@ -90,12 +90,20 @@ const onSubmit = () => {
         </div>
         <div class="hr1"></div>
       </el-col>
-      <el-button type="primary" @click="onSubmit" round>{{ $t('button.submit') }}</el-button>
     </el-row>
+    <div class="button-container">
+      <el-button type="primary" @click="onSubmit" round>
+        {{ $t('button.submit') }}
+      </el-button>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.button-container {
+  text-align: center; /* 让容器内的内容居中 */
+}
+
 .el-main {
   /* color: #333; */
   text-align: center;
@@ -108,12 +116,15 @@ const onSubmit = () => {
   font-weight: bold;
   letter-spacing: 3px;
   color: black;
-  text-align: center;
+  display: block;
+  padding: 12px;
+  font-size: 20px;
+  /* text-align: center; */
 }
 .question {
   text-align: left;
 
-  color: #989898;
+  color: #322c2c;
   font-weight: bold;
 }
 .hr {

@@ -125,9 +125,10 @@ watch(
   { immediate: true } // 添加这一行以确保初始值也被处理
 )
 const get = async () => {
+  // 2861
   // `d-info/${userStore.gId}/get`
   try {
-    const response = await axios.get(`d-info/4925/get`)
+    const response = await axios.get(`d-info/${userStore.gId}/get`)
     console.log(response.data)
     // 更新 info 对象的属性
     Object.assign(info, response.data.info)
@@ -144,7 +145,7 @@ const video = ref(null)
 const get_ploted = async () => {
   try {
     // `d-count/${userStore.gId}/ploted_video`
-    const response = await axios.get(`d-count/4925/ploted_video`)
+    const response = await axios.get(`d-count/${userStore.gId}/ploted_video`)
     console.log(response.data)
     video.value = response.data
   } catch (error) {
@@ -259,90 +260,118 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <el-row style="display: block">
-      <div style="text-align: center">
-        <!--标题-->
-        <h2>{{ $t('result_page.title') }}</h2>
-      </div>
-
-      <div style="display: flex">
-        <!--下面的视频和评估-->
-        <el-col :span="12">
-          <div class="hr"></div>
-          <div class="l-form-label" style="margin-top: 5%; text-align: center">
-            {{ $t('result_page.video_text') }}
+  <div class="divh">
+    <el-container class="bg-purple">
+      <el-main class="blur-box">
+        <el-row style="display: block">
+          <div style="text-align: center">
+            <!--标题-->
+            <h2>{{ $t('result_page.title') }}</h2>
           </div>
 
-          <!-- ref="videoPlayer" -->
-          <div class="video-wrapper">
-            <video
-              ref="videoPlayer"
-              controls
-              :style="{
-                width: '300px',
-                height: 'auto',
-                margin: '100 10%'
-              }"
-            >
-              <source :src="video_url" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-            <hr class="hr1" />
-            <div>
-              <Result_graph />
-            </div>
+          <div style="display: flex">
+            <!--下面的视频和评估-->
+            <el-col :span="10">
+              <div class="hr"></div>
+              <div class="l-form-label" style="margin-top: 5%; text-align: center">
+                {{ $t('result_page.video_text') }}
+              </div>
+
+              <!-- ref="videoPlayer" -->
+              <div class="video-wrapper">
+                <video ref="videoPlayer" controls>
+                  <source :src="video_url" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                <hr class="hr1" />
+                <div class="outdiv">
+                  <Result_graph />
+                </div>
+              </div>
+            </el-col>
+
+            <el-col :span="14">
+              <Result_data />
+            </el-col>
           </div>
-        </el-col>
+        </el-row>
 
-        <el-col :span="12">
-          <Result_data />
-        </el-col>
-      </div>
-    </el-row>
+        <el-footer>
+          <el-button
+            v-if="!errorResult"
+            round
+            class="bt-check"
+            type="primary"
+            size="small"
+            @click="onCopyResult"
+            ><span class="btn-txt"
+              ><el-icon><CopyDocument /></el-icon>{{ $t('result_page.btn_copy') }}</span
+            ></el-button
+          >
 
-    <el-footer>
-      <el-button
-        v-if="!errorResult"
-        round
-        class="bt-check"
-        type="primary"
-        size="small"
-        @click="onCopyResult"
-        ><span class="btn-txt"
-          ><el-icon><CopyDocument /></el-icon>{{ $t('result_page.btn_copy') }}</span
-        ></el-button
-      >
+          <el-button
+            round
+            v-if="errorResult"
+            class="bt-check"
+            type="warning"
+            size="small"
+            @click="onBack"
+            ><span class="btn-txt"
+              ><el-icon><Refresh /></el-icon>{{ $t('result_page.btn_re') }}</span
+            ></el-button
+          >
 
-      <el-button
-        round
-        v-if="errorResult"
-        class="bt-check"
-        type="warning"
-        size="small"
-        @click="onBack"
-        ><span class="btn-txt"
-          ><el-icon><Refresh /></el-icon>{{ $t('result_page.btn_re') }}</span
-        ></el-button
-      >
-
-      <el-button
-        v-if="!errorResult"
-        round
-        class="bt-check"
-        type="success"
-        size="small"
-        @click="onBack"
-        ><span class="btn-txt"
-          ><el-icon><SuccessFilled /></el-icon>{{ $t('result_page.btn_home') }}</span
-        ></el-button
-      >
-      <!-- <div v-if="!errorResult" class="note-txt">注：{{ note }}</div> -->
-    </el-footer>
+          <el-button
+            v-if="!errorResult"
+            round
+            class="bt-check"
+            type="success"
+            size="small"
+            @click="onBack"
+            ><span class="btn-txt"
+              ><el-icon><SuccessFilled /></el-icon>{{ $t('result_page.btn_home') }}</span
+            ></el-button
+          >
+          <!-- <div v-if="!errorResult" class="note-txt">注：{{ note }}</div> -->
+        </el-footer>
+      </el-main>
+    </el-container>
   </div>
 </template>
 
 <style scoped>
+.outdiv {
+  width: 100%;
+  height: 100%; /* 确保容器占满父容器的高度 */
+  display: flex;
+  justify-content: center; /* 水平居中对齐 */
+  align-items: center; /* 垂直居中对齐 */
+  padding: 2px; /* 内边距 */
+  box-sizing: border-box; /* 包括内边距和边框在内的总宽度 */
+}
+.divh {
+  height: 630px !important;
+}
+.bg-purple {
+  background: #d3dce6;
+  background-image: url('../assets/华南理工大学励吾科技楼（2007）.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center; /* 确保图片居中 */
+  height: 100%; /* 确保容器有足够的高度 */
+  width: 100%; /* 确保容器有足够的宽度 */
+}
+.blur-box {
+  width: 100%;
+  /* 宽度改成跟字一样长，字有多长，宽有多长 */
+
+  /* height: 250px; */
+  /* background-image: url("../assets/华南理工大学励吾科技楼（2007）.jpg"); */
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+  /* padding-top: 15px; */
+  margin: 0 auto;
+}
 .hr {
   width: 100%;
   height: 3px;
@@ -356,15 +385,6 @@ onMounted(() => {
   background-color: #eeeeee;
 }
 
-.el-container {
-  /* margin-top: 10%; */
-  margin-left: 10%;
-  margin-right: 10%;
-  /* display: flex;
-    flex-direction: column; */
-  /* align-items: center; */
-}
-
 .el-footer {
   /* background-color: #b3c0d1; */
   color: #333;
@@ -375,6 +395,7 @@ onMounted(() => {
 .el-main {
   /* background-color: #e9eef3; */
   color: #333;
+  padding: 0;
   /* text-align: left; */
 }
 
@@ -392,10 +413,10 @@ onMounted(() => {
   text-align: left;
   /* float: left; */
 
-  font-size: 25rpx;
+  font-size: 16px;
   font-weight: bold;
   /* opacity: 20%; */
-  color: #566573;
+  color: #33393e;
 }
 
 .l-form-label1 {
@@ -493,10 +514,18 @@ h1.title {
 }
 
 .video-wrapper {
-  text-align: center;
-  height: 50%;
-  /* 调到离上面一个组件30px */
   margin-top: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.video-wrapper video {
+  width: 70%;
+  height: 270px;
+  border-radius: 25px; /* 圆角 */
+  border: 2px solid #ddd; /* 边框 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影 */
 }
 
 .hr1 {

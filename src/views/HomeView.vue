@@ -54,7 +54,7 @@ function handleClose() {
 </script>
 
 <template>
-  <div>
+  <div class="divh">
     <el-container class="bg-purple">
       <el-main class="blur-box">
         <Home_icon></Home_icon>
@@ -95,24 +95,21 @@ function handleClose() {
             </span>
           </template>
         </el-dialog>
-        <div class="version-txt">v1.1<br /><br /><br /></div>
+        <div class="version-txt">v2.0<br /><br /><br /></div>
       </el-main>
     </el-container>
   </div>
 </template>
 
-<style>
-.container {
+<style scoped>
+.divh {
+  height: 630px !important;
+}
+/* .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.el-header,
-.el-footer {
-  color: #333;
-  text-align: center;
-  /* line-height: 0px; */
-}
+} */
 
 .el-main {
   color: #333;
@@ -121,7 +118,7 @@ function handleClose() {
 }
 
 .el-dialog {
-  border-radius: 10px; /* 设置圆角半径为 10px */
+  border-radius: 15px; /* 设置圆角半径为 15px */
 }
 
 .circleImg {
@@ -138,14 +135,16 @@ function handleClose() {
   max-width: 100%; /* 设置最大宽度 */
   word-wrap: break-word; /* 自动换行 */
 }
+
 .bg-purple {
   background-image: url('../assets/华南理工大学励吾科技楼（2007）.jpg');
-  opacity: 100%;
-  /* 允许背景图片拉伸填充整个页面 */
-  /* 允许背景填充整个页面 */
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center; /* 确保图片居中 */
+  height: 100%; /* 确保容器有足够的高度 */
+  width: 100%; /* 确保容器有足够的宽度 */
 }
+
 .title {
   text-align: center;
   font-size: 40px;
@@ -161,12 +160,15 @@ function handleClose() {
   /* 颜色是当前颜色取反色 */
 
   color: #f5fad9;
+  padding-top: 30px;
 }
 .blur-box {
   /* /* width: 100%; */
   /* 宽度改成跟字一样长，字有多长，宽有多长 */
 
   /* height: 250px; */
+  /* height: 800px; */
+  padding-top: 100px;
   background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(2px);
 
